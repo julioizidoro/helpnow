@@ -39,7 +39,7 @@ public class ConectionFactory {
     public static EntityManager getConnection() {
         EntityManagerFactory emf = null;
         manager = null;
-        emf = Persistence.createEntityManagerFactory("tasktimePU");
+        emf = Persistence.createEntityManagerFactory("systmPU");
         manager = emf.createEntityManager();
         if (!manager.isOpen()) {
             JOptionPane.showMessageDialog(null, "Conexão fechada");

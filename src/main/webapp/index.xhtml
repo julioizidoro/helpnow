@@ -1,62 +1,38 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+   
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Help Now</title>
-        <link href="resources/css/css.css" rel="stylesheet" type="text/css" />
+        <link href="resources/css/csslogin.css" rel="stylesheet" type="text/css" />
     </h:head>
-    <h:body>
-        <div id="top" class="top">
-            <h:form xmlns="http://www.w3.org/1999/xhtml"
-                    xmlns:h="http://xmlns.jcp.org/jsf/html"
-                    xmlns:p="http://primefaces.org/ui"
-                    xmlns:ui="http://java.sun.com/jsf/facelets"
-                    xmlns:f="http://xmlns.jcp.org/jsf/core">
-                <div id="tudo">
-                    <img src="resources/img/HelpNow.png" /> 
-                </div>
 
-                <div id="centro">
+    <h:body >
+            <h:form id="login" class="login">
+                <img  class="logologin" src="resources/img/logoquadrada.png" />
+                <div id="centrologin" class="tabelalogin">
+                    
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <br></br><br></br><br></br><br></br>
+                    <p:outputLabel value="Login" class="espacologinbra"/>
                     <br></br>
+                    <p:inputText value="#{usuarioLogadoMB.usuario.login}" size="40" class="espacologin" />
+                    <br></br><br></br>
+                    <p:outputLabel value="Senha" class="espacologinbra"/>
                     <br></br>
-                    <img src="resources/img/adicionar.png" class="btnAdicionar" width="19" height="19"/>
-                    <p:commandLink action="#{chamadoMB.novo()}" value="Novo Chamado" class="labelAdicionar"/>
-                    <br></br>
-                    <p:dataTable var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                                 paginator="true" rows="10"    rowIndexVar="rowIx">
-
-                        <p:column headerText="Problema"  >
-                            <h:outputText value="#{tabelaChamado.problema}" />
-                        </p:column>
-                        <p:column headerText="Situação"  style="width: 80px;">
-                            <h:outputText value="#{tabelaChamado.situacao}" />
-                        </p:column>
-                        <p:column headerText="Area" style="width:120px;" >
-                            <h:outputText value="#{tabelaChamado.area.descricao}" />
-                        </p:column>
-                        <p:column headerText="Data de Abertura" style="width: 105px;" >
-                            <h:outputText value="#{tabelaChamado.dataabertura}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-                            </h:outputText>
-                        </p:column>
-
-                        <p:column headerText=""  style="width: 40px;">
-                            <p:commandLink>
-                                <img src="resources/img/interacao.png" width="37" height="32"/>
-                            </p:commandLink>
-                        </p:column>
-                    </p:dataTable>
-                    <br></br>
-                    <br></br>
+                    <p:inputText value="#{usuarioLogadoMB.usuario.senha}" type="password"  size="40" class="espacologin"/>
+                     <br></br><br></br>
+                     <p:commandButton value="Login" class="loginButton" action="#{usuarioLogadoMB.validarUsuario()}"/>
+                    <p:commandButton value="Alterar Senha" action="#{usuarioLogadoMB.validarTrocarSenha()}" class="loginButton2"  oncomplete="PF('dll').show()"  />
+                                
+                    <br></br><br></br><br></br><br></br><br></br>
                 </div>
             </h:form>
-        </div>
+        <h:outputScript library="js" name="jquery.js" />
+	<h:outputScript library="js" name="index.js" />
     </h:body>
 </html>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Interação</title>
+        <link href="resources/css/css.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <h:form id="cadChamado">
+            <div style="background: #F0FFFF;font-size: 10px;"> <br></br>
+                <p:inputTextarea value="#{interacaoMB.interacao.descricao}" rows="3" cols="90"/>
+                    <br></br><br></br>
+                    <p:commandButton value="Adicionar" icon="ui-icon-plusthick" class="botaoDialog" action="#{interacaoMB.salvar()}"  update="tabelaInteracao"/>
+                    <br></br> <br></br>
+                    <p:carousel id="tabelaInteracao" value="#{interacaoMB.listaInteracao}" var="interacao" itemStyleClass="carousel" style="width:475px;height:145px;" numVisible="1" firstVisible="0">
+                        <h:panelGrid columns="3" style="width:100%" cellpadding="5" columnClasses="label,value">
+                            <h:outputText value="#{interacao.data}" >
+                                <f:convertDateTime   pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </h:outputText>
+                            <h:outputText value="#{interacao.hora}"/>
+                            <h:outputText value="#{interacao.usuario}" />
+                            <h:outputText value="Comentário:" />
+                            <h:outputText value="#{interacao.descricao}"/>
+                        </h:panelGrid>
+                    </p:carousel>
+                     <br></br> <br></br> 
+                 </div>
+            </h:form>
+    </h:body>
+</html>

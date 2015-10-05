@@ -1,0 +1,71 @@
+body {
+    font-size:10px;
+    font-family: tahoma;
+    background-color: #1F8871;
+    color: #333;
+    text-align: center;
+}
+
+h1 {
+    margin: 10px 20px 10px 20px;
+}
+#tudo {
+    top:-15px;
+    position: relative;
+    background: #ffffff;
+    margin: 0px 0 20px -390px;
+    width: 900px;
+    left:19.7%;
+    margin-top:-15px;
+    border: 0px solid #aaa;
+    margin-left:-10px;text-align: left;
+}
+.login{
+    margin-top:6%;
+    margin-left: -2%;
+    width: 102.50%;
+    background: -moz-linear-gradient(
+		top,
+		#1F8871 0%,
+		#1F8871 10%,
+		#ffffff 34%,
+		#ffffff 86%,
+		#1F8871);
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#0e3e3e),
+		color-stop(0.8, #1F8871),
+		color-stop(0.50, #ffffff),
+		color-stop(0.84, #ffffff),
+		to(#0e3e3e));
+}
+.logologin{
+    position: fixed;
+    margin-top:3.4%;
+    margin-left:-6.0%;
+}
+.tabelalogin{
+    text-align:left; 
+    width: 100%;
+}
+
+
+.espacologin{
+    margin-left:40%;
+     font-size: 12px;
+}
+
+.espacologinbra{
+    margin-left:40%;
+    color: #1F8871;
+    font-size: 12px;
+    
+}
+.loginButton{
+    margin-left:43%;
+    font-size: 10px;
+}
+.loginButton2{
+    margin-left:1%;
+    font-size: 10px;
+}

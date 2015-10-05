@@ -12,6 +12,7 @@ h1 {
 #tudo{
     margin-top:2%;
     width:80%;
+    margin-left: 10%;
     background: #ffffff;
     font-size: 10px;
     text-align: center;
@@ -23,6 +24,7 @@ h1 {
 
 #centro{
     width: 80%;
+     margin-left: 10%;
     background: #F0FFFF;
     -moz-border-radius-bottomright: 20px;
     -moz-border-radius-bottomleft: 20px;
@@ -41,7 +43,7 @@ h1 {
 }
 
 .btnAdicionar{
-    margin-left:75%;
+    margin-left:12%;
 }
 .btnAdicionarArea{
     margin-left:66%;

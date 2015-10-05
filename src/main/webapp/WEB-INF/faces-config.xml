@@ -26,11 +26,27 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+        <navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultaChamado</from-outcome>
+			<to-view-id>/pages/chamado/consChamado.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
          <navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>consultaarea</from-outcome>
 			<to-view-id>/pages/area/consArea.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+        <navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>interacao</from-outcome>
+			<to-view-id>/pages/chamado/interacao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

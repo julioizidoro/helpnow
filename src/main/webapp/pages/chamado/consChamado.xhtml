@@ -9,9 +9,11 @@
         <ui:define name="corpo">
             <h:form id="consultaChamado">
                 <div id="centro">
-                    <img src="resources/img/adicionar.png" class="btnAdicionar" width="19" height="19"/>
-                    <p:commandLink action="#{chamadoMB.novo()}" value="Novo Chamado" class="labelAdicionar"/>
-                    <br></br>
+                    
+                    <p:commandLink action="#{chamadoMB.area()}" class="labelAdicionar">
+                        <img src="../../resources/img/novo.png" class="btnAdicionar" />
+                    </p:commandLink>
+                    <br></br><br></br>
                     <p:dataTable var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                  paginator="true" rows="10"    rowIndexVar="rowIx">

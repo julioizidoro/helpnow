@@ -1,13 +1,19 @@
 package br.com.travelmate.ManagerBean;
 
 import br.com.travelmate.facade.ChamadoFacade;
+import br.com.travelmate.model.Area;
 import br.com.travelmate.model.Chamado;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
+import org.primefaces.context.RequestContext;
 
 
 @Named
@@ -20,11 +26,12 @@ public class ChamadoMB implements Serializable{
     
     @PostConstruct
     public void init(){
-        if (chamado!=null){
-            getListaChamado();
-        }else{
-            listaChamado = new ArrayList<Chamado>();
-        }
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        chamado = (Chamado) session.getAttribute("chamado");
+        session.removeAttribute("chamado");
+        gerarListaChamado();
+        chamado = new Chamado();
     }
 
     public Chamado getChamado() {
@@ -42,20 +49,24 @@ public class ChamadoMB implements Serializable{
     public void setListaChamado(List<Chamado> listaChamado) {
         this.listaChamado = listaChamado;
     }
+
     
     
     
-    public void gerarListaProjeto() {
-        String sql = "Select c from Chamado c order by c.dataabertura";
+    public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        listaChamado = chamadoFacade.listar(sql);
+        listaChamado = chamadoFacade.listar("");
         if (listaChamado == null) {
             listaChamado = new ArrayList<Chamado>();
         }
     }
     
     public String novo(){
-        return "cadastrochamado";
+        chamado = new Chamado();
+        Map<String,Object> options = new HashMap<String, Object>();
+        options.put("contentWidth", 430);
+        RequestContext.getCurrentInstance().openDialog("cadastrochamado", options, null);
+        return "";
     }
     
     
@@ -64,6 +75,9 @@ public class ChamadoMB implements Serializable{
     }
     
     public String area(){
-        return "consultaarea";
+        Map<String,Object> options = new HashMap<String, Object>();
+        options.put("contentWidth", 500);
+        RequestContext.getCurrentInstance().openDialog("interacao", options, null);
+        return "";
     }
 }

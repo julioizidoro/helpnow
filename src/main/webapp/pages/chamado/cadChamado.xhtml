@@ -1,34 +1,39 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <ui:composition template="/pages/templates/default.xhtml">
-        <ui:define name="corpo">
-            <h:form id="cadChamado">
-                <div id="centro">
-                     <br></br> <br></br> <br></br><br></br> <br></br>
-                     <p:outputLabel for="descricao" value="Descricão:" style="margin-left:25%;"/>
-                    <p:inputText id="descricao" value="#{chamadoMB.chamado.problema}" style="width:40%;margin-left: 0.7%"/>
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Abrir Chamada</title>
+        <link href="resources/css/css.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <h:form id="cadChamado">
+            <div style="background: #F0FFFF;font-size: 10px;">
+                     <br></br>
+                     <p:outputLabel for="descricao" value="Descricão:" style="margin-left:10%;"/>
+                    <p:inputText id="descricao" value="#{chamadoMB.chamado.problema}" style="width:62%;margin-left: 0.7%"/>
                     <br></br>  <br></br>
-                    <p:outputLabel for="area" value="Area: " style="margin-left:27% "/>
-                    <p:selectOneMenu id="area" value="#" style="width: 15%;margin-left: 0.7%">
-                            <f:selectItem itemLabel="Selecione" itemValue="" />
-                            <f:selectItems value="#" />
+                    <p:outputLabel for="area" value="Area: " style="margin-left:16% "/>
+                    <p:selectOneMenu id="area" value="#{cadChamadoMB.area}" style="width:26%;margin-left: 0.7%" converter="AreaConverter">
+                            <f:selectItem itemLabel="Selecione" itemValue="0" noSelectionOption="true"/> 
+                            <f:selectItems id="idarea" value="#{cadChamadoMB.listaArea}" var="area" itemLabel="#{area.descricao}" itemValue="#{area}"/>
+                            <f:attribute name="listaArea" value="#{cadChamadoMB.listaArea}"/>
+                            <p:ajax event="change" update="cidade"/> 
                     </p:selectOneMenu>
                     
-                    <p:commandLink action="#" style="margin-left:16%;text-decoration: none">
+                    <p:commandLink action="#{cadChamadoMB.salvar()}" style="margin-left:10%;text-decoration: none">
                         <img src="../../resources/img/confirmar.png"/>
                     </p:commandLink>
-                    <p:commandLink action="#" style="margin-left: 3%;text-decoration: none">
+                    <p:commandLink action="#{cadChamadoMB.cancelar()}" style="margin-left: 3%;text-decoration: none">
                         <img src="../../resources/img/cancelar.png"/>
                     </p:commandLink>
-                    <br></br>  <br></br> <br></br>  <br></br> <br></br>  <br></br> <br></br> 
-                </div>
-            </h:form>     
-           
-        </ui:define>
-    </ui:composition>
+                    <br></br> <br></br> 
+                 </div>
+            </h:form>
+    </h:body>
 </html>
