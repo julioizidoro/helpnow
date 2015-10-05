@@ -9,7 +9,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Help Now</title>
-        <link href="../../resources/css/css.css" rel="stylesheet" type="text/css" />
+        <link href="resources/css/css.css" rel="stylesheet" type="text/css" />
     </h:head>
     <h:body>
         <div id="top" class="top">
@@ -19,12 +19,44 @@
                     xmlns:ui="http://java.sun.com/jsf/facelets"
                     xmlns:f="http://xmlns.jcp.org/jsf/core">
                 <div id="tudo">
-                    <img src="../../resources/img/HelpNow.png" /> 
+                    <img src="resources/img/HelpNow.png" /> 
+                </div>
+
+                <div id="centro">
+                    <br></br>
+                    <br></br>
+                    <img src="resources/img/adicionar.png" class="btnAdicionar" width="19" height="19"/>
+                    <p:commandLink action="#{chamadoMB.novo()}" value="Novo Chamado" class="labelAdicionar"/>
+                    <br></br>
+                    <p:dataTable var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                 paginator="true" rows="10"    rowIndexVar="rowIx">
+
+                        <p:column headerText="Problema"  >
+                            <h:outputText value="#{tabelaChamado.problema}" />
+                        </p:column>
+                        <p:column headerText="Situação"  style="width: 80px;">
+                            <h:outputText value="#{tabelaChamado.situacao}" />
+                        </p:column>
+                        <p:column headerText="Area" style="width:120px;" >
+                            <h:outputText value="#{tabelaChamado.area.descricao}" />
+                        </p:column>
+                        <p:column headerText="Data de Abertura" style="width: 105px;" >
+                            <h:outputText value="#{tabelaChamado.dataabertura}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText=""  style="width: 40px;">
+                            <p:commandLink>
+                                <img src="resources/img/interacao.png" width="37" height="32"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                    <br></br>
+                    <br></br>
                 </div>
             </h:form>
-        </div>
-        <div  class="center_content">
-            
         </div>
     </h:body>
 </html>

@@ -9,7 +9,10 @@
         <ui:define name="corpo">
             <h:form id="ConsArea">
                 <div id="centro">
-                     <p:dataTable var="tabelaArea" value="#" 
+                     <br></br> <br></br> <br></br>
+                     <img src="../../resources/img/adicionar.png" class="btnAdicionarArea" width="19" height="19"/>
+                     <p:commandLink action="#{areaMB.novo()}" value="Nova Area" class="labelAdicionar"/>
+                    <p:dataTable var="tabelaArea" value="#" class="consultaArea"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                  paginator="true" rows="10"    rowIndexVar="rowIx">
                     
@@ -18,7 +21,7 @@
                      </p:column>
                      </p:dataTable>
                     <br></br>
-                  
+                  <br></br>
                 </div>
             </h:form>     
            

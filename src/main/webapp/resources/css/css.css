@@ -1,17 +1,58 @@
 body {
     font-size:10px;
     font-family: tahoma;
-    background-color: #F0FFFF;
+    background-color: #1F8871;
     color: #333;
-    text-align: center;
+    text-align: left;
 }
 
 h1 {
     margin: 10px 20px 10px 20px;
 }
 #tudo{
-    width: 100%;
+    margin-top:2%;
+    width:80%;
     background: #ffffff;
     font-size: 10px;
     text-align: center;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-topright: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#centro{
+    width: 80%;
+    background: #F0FFFF;
+    -moz-border-radius-bottomright: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.tabelaArea{
+    width:75%;
+    margin-left:12%
+}
+
+.consultaArea{
+    width:50%;
+    margin-left:25%
+}
+
+.btnAdicionar{
+    margin-left:75%;
+}
+.btnAdicionarArea{
+    margin-left:66%;
+}
+
+.btnArea{
+    margin-left:83%;
+}
+.labelAdicionar{
+    margin-left: 0.5%;
+    text-decoration: none;
+    color: #1F8871;
+    font-size: 14px;
 }

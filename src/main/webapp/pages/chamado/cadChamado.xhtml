@@ -9,21 +9,23 @@
         <ui:define name="corpo">
             <h:form id="cadChamado">
                 <div id="centro">
-                    <p:outputLabel for="descricao" value="Descricão:"/>
-                    <p:inputText id="descricao" value="#"/>
-                    <br></br>
-                    <p:outputLabel for="area" value="Area: "/>
-                    <p:selectOneMenu id="area" value="#">
-                            <f:selectItem itemLabel="Select One" itemValue="" />
+                     <br></br> <br></br> <br></br><br></br> <br></br>
+                     <p:outputLabel for="descricao" value="Descricão:" style="margin-left:25%;"/>
+                    <p:inputText id="descricao" value="#{chamadoMB.chamado.problema}" style="width:40%;margin-left: 0.7%"/>
+                    <br></br>  <br></br>
+                    <p:outputLabel for="area" value="Area: " style="margin-left:27% "/>
+                    <p:selectOneMenu id="area" value="#" style="width: 15%;margin-left: 0.7%">
+                            <f:selectItem itemLabel="Selecione" itemValue="" />
                             <f:selectItems value="#" />
                     </p:selectOneMenu>
                     
-                    <br></br>
-                    <br></br>
-                    <p:commandButton id="btnConfirmar" action="#" value="confirmar" />
- 
-                    <p:commandButton  id="btnCancelar" action="#" value="Cancelar" />
-
+                    <p:commandLink action="#" style="margin-left:16%;text-decoration: none">
+                        <img src="../../resources/img/confirmar.png"/>
+                    </p:commandLink>
+                    <p:commandLink action="#" style="margin-left: 3%;text-decoration: none">
+                        <img src="../../resources/img/cancelar.png"/>
+                    </p:commandLink>
+                    <br></br>  <br></br> <br></br>  <br></br> <br></br>  <br></br> <br></br> 
                 </div>
             </h:form>     
            

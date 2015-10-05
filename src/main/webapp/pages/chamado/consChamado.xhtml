@@ -9,31 +9,33 @@
         <ui:define name="corpo">
             <h:form id="consultaChamado">
                 <div id="centro">
-                    <p:dataTable var="tabelaChamado" value="#" 
+                    <img src="resources/img/adicionar.png" class="btnAdicionar" width="19" height="19"/>
+                    <p:commandLink action="#{chamadoMB.novo()}" value="Novo Chamado" class="labelAdicionar"/>
+                    <br></br>
+                    <p:dataTable var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                  paginator="true" rows="10"    rowIndexVar="rowIx">
 
-                        <p:column headerText="Descrição"  >
-                             <h:outputText value="#" />
+                        <p:column headerText="Problema"  >
+                            <h:outputText value="#{tabelaChamado.problema}" />
                         </p:column>
-                         <p:column headerText="Situação"  >
-                             <h:outputText value="#" />
+                        <p:column headerText="Situação"  style="width: 80px;">
+                            <h:outputText value="#{tabelaChamado.situacao}" />
                         </p:column>
-                        <p:column headerText="Area"  >
-                             <h:outputText value="#" />
+                        <p:column headerText="Area" style="width:120px;" >
+                            <h:outputText value="#{tabelaChamado.area.descricao}" />
                         </p:column>
-                       <p:column headerText="Data"  >
-                             <h:outputText value="#" >
-                                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-                             </h:outputText>
-                                     
+                        <p:column headerText="Data de Abertura" style="width: 105px;" >
+                            <h:outputText value="#{tabelaChamado.dataabertura}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </h:outputText>
                         </p:column>
-                        
-                         <p:column headerText=""  >
-                               <p:commandButton value="#" />
+
+                        <p:column headerText=""  style="width: 40px;">
+                            <p:commandLink>
+                                <img src="resources/img/interacao.png" width="37" height="32"/>
+                            </p:commandLink>
                         </p:column>
-                        
-                        
                     </p:dataTable>
                     <br></br>
                     <br></br>

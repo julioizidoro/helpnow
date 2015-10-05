@@ -9,14 +9,17 @@
         <ui:define name="corpo">
             <h:form id="cadArea">
                 <div id="centro">
-                     <p:outputLabel for="descricao" value="Descricão:"/>
-                    <p:inputText id="descricao" value="#"/>
-                    <br></br>
-                    <br></br>
-                    <p:commandButton id="btnConfirmar" action="#" value="confirmar" />
- 
-                    <p:commandButton  id="btnCancelar" action="#" value="Cancelar" />
-
+                    <br></br> <br></br> <br></br><br></br>
+                     <p:outputLabel for="descricao" value="Descricão:" style="margin-left:25%;"/>
+                     <p:inputText id="descricao" value="#{areaMB.area.descricao}" style="width:40%;margin-left: 0.7%"/>
+                    <br></br>  <br></br>
+                    <p:commandLink action="#" style="margin-left:61%;text-decoration: none" title="Confirmar">
+                        <img src="../../resources/img/confirmar.png"/>
+                    </p:commandLink>
+                    <p:commandLink action="#" style="margin-left: 3%;text-decoration: none" title="Cancelar">
+                        <img src="../../resources/img/cancelar.png"/>
+                    </p:commandLink>
+                     <br></br>  <br></br> <br></br>  <br></br>
                 </div>
             </h:form>     
            
