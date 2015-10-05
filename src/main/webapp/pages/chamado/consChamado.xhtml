@@ -16,112 +16,30 @@
                         <p:column headerText="Descrição"  >
                              <h:outputText value="#" />
                         </p:column>
-                        <p:column headerText=""  sortBy="#{consVendaComissao.vendas.unidadenegocio.nomeFantasia}">
-                            <h:outputText value="#{consVendaComissao.vendas.unidadenegocio.nomeFantasia}" />
+                         <p:column headerText="Situação"  >
+                             <h:outputText value="#" />
                         </p:column>
-                        <p:column headerText="Valor Bruto" style="width:95px;text-align:right;" sortBy="#{consVendaComissao.valorbruto}">
-                            <h:outputText value="#{consVendaComissao.valorbruto}">
-                                <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-                            </h:outputText>
+                        <p:column headerText="Area"  >
+                             <h:outputText value="#" />
                         </p:column>
-                        <p:column headerText="Valor Fornecedor" style="width:105px;text-align:right;">
-                            <h:outputText value="#{consVendaComissao.valorfornecedor}" >
-                                <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-                            </h:outputText>
-                        </p:column> 
-                        <p:column headerText="Comissão TM" style="width:90px;text-align:right;">
-                            <h:outputText value="#{consVendaComissao.comissaotm}" >
-                                <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-                            </h:outputText>
+                       <p:column headerText="Data"  >
+                             <h:outputText value="#" >
+                                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                             </h:outputText>
+                                     
                         </p:column>
-                        <p:column headerText="Comissão Franquia" style="width:117px;text-align:right;">
-                            <h:outputText value="#{consVendaComissao.comissaofraquia}" >
-                                <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-                            </h:outputText>
+                        
+                         <p:column headerText=""  >
+                               <p:commandButton value="#" />
                         </p:column>
+                        
+                        
                     </p:dataTable>
                     <br></br>
                     <br></br>
                 </div>
             </h:form>     
-            <h:form id="dialog">
-                <p:dialog id="dialog_visualizacao" header="#{vendasComissaoMB.tituloDialog}" widgetVar="visualizacao"  width="40%" class="dialog" style="background:#d0e9c6" >
-                    <p:outputLabel value="Valor" class="espacocampos" style="font-size: 11px"/>
-                    <p:outputLabel value="Data" class="leftcampo" style="font-size: 11px"/>
-                    <p:outputLabel value="Produto" class="espacodialog3" style="font-size: 11px"/>
-                    <br></br>
-
-                    <p:inputText  size="12" value="#{vendasComissaoMB.vendascomissao.vendas.valor}" id="valor" class="espacocamposright" style="font-size: 11px">
-                        <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-                    </p:inputText>
-                    <p:calendar id="data" value="#{vendasComissaoMB.vendascomissao.vendas.dataVenda}" style="font-size: 11px" class="espacocampos"  pattern="dd/MM/yyyy" mask="true" size="11" maxlength="15" >
-                        <f:convertDateTime   pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-                    </p:calendar>
-                    <p:inputText value="#{vendasComissaoMB.vendascomissao.vendas.produtos.descricao}" size="27" id="produto" class="espacocampos" style="font-size: 11px"/>
-                    <br></br><br></br>
-
-                    <p:outputLabel value="Unidade" style="font-size: 11px" class="espacocampos"/>
-                    <p:outputLabel value="Cliente" class="left22" style="font-size: 11px"/>
-                    <br></br>
-                    <p:inputText value="#{vendasComissaoMB.vendascomissao.vendas.unidadenegocio}" size="31" id="unidade" class="espacocampos" style="font-size: 11px"/>
-                    <p:inputText value="#{vendasComissaoMB.vendascomissao.vendas.cliente}" size="32" id="cliente" class="espacocampos" style="font-size: 11px"/>
-                    <br></br><br></br>
-
-                    <p:outputLabel value="Consultor" style="font-size: 11px" class="espacocampos"/>
-                    <p:outputLabel value="Parceiro"  class="left22" style="font-size: 11px"/>
-                    <br></br>
-                    <p:inputText value="#{vendasComissaoMB.vendascomissao.vendas.usuario}" id="consultor" size="32" class="espacocampos" style="font-size: 11px"/>
-                    <p:inputText value="#{vendasComissaoMB.vendascomissao.vendas.fornecedor}" id="parceiro" size="31"  class="espacocampos" style="font-size: 11px"/>
-                    <br></br><br></br>
-                </p:dialog>
-
-            </h:form>
-            <h:form id="comissao">
-                <p:dialog id="dialog_comissao" header="Calcular Comissao" widgetVar="comissao"  width="40%" class="dialog2" style="background:#d0e9c6" >
-                    <p:outputLabel value="Período" for="periodo" class="espacocampos"/> 
-                    <br></br>
-                    <p:calendar id="periodo"  class="espacocampos"  pattern="dd/MM/yyyy" mask="true" size="14"  value="#{vendasComissaoMB.dataInicial}">
-                        <f:convertDateTime   pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-                    </p:calendar>
-                    <p:calendar id="periodos" class="iata"  pattern="dd/MM/yyyy" mask="true" size="14" value="#{vendasComissaoMB.dataFinal}">
-                        <f:convertDateTime   pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-                    </p:calendar>
-                    <p:commandButton value="Calcular" style="font-size: 10px;" class="campos" icon="	ui-icon-calculator" action="#{vendasComissaoMB.calculoComissao()}" process="@form" update="comissaotabela" />
-
-                    <br></br><br></br>
-                    <p:dataTable id="comissaotabela" var="comissaotabela"  value="#{vendasComissaoMB.calcularComissao.listaComissao}" class="tabela3" 
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                                 paginator="true" rows="10" style="margin-bottom:20px;font-size: 10px;" >
-                        <f:facet name="{Exporters}">
-                            <h:commandLink>
-                                <img src="../../resources/img/excel.png" width="20" class="imagens"/>
-                                <p:dataExporter type="xls" target="recebimentotabela" fileName="recebimento" />
-                            </h:commandLink>
-                        </f:facet>
-                        <p:column headerText="Consultor" styleClass="">
-                            <h:outputText value="#{comissaotabela.nome}"/>
-                        </p:column>
-                        <p:column headerText="Cargo" styleClass="">
-                            <h:outputText value="#{comissaotabela.cargo}"/>
-                        </p:column>
-                        <p:column headerText="Unidade">
-                            <h:outputText value="#{comissaotabela.unidade}"/>
-                        </p:column>
-                        <p:column headerText="Venda Bruta" style="width:90px">
-                            <h:outputText value="#{comissaotabela.valorBruto}" >
-                                <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column headerText="Comissão" style="width:90px">
-                            <h:outputText value="#{comissaotabela.comissao}" >
-                                <f:convertNumber pattern="##,###,###,###.##" minFractionDigits="2" />
-                            </h:outputText>
-                        </p:column>
-                    </p:dataTable>
-                    <p:commandButton value="Fechar" class="espaco2" style="font-size: 10px;" icon="ui-icon-close" onclick="comissao.hide();"/>
-                    <br></br>
-                </p:dialog>
-            </h:form>
+           
         </ui:define>
     </ui:composition>
 </html>
