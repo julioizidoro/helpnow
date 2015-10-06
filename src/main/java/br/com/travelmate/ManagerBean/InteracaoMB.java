@@ -24,8 +24,8 @@ public class InteracaoMB implements Serializable{
     public void init(){
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-        chamado = (Chamado) session.getAttribute("chamados");
-        session.removeAttribute("chamados");
+        chamado = (Chamado) session.getAttribute("chamado");
+        session.removeAttribute("chamado");
         interacao = new Interacao();
         if (interacao!=null){
             gerarListaInteracao();
@@ -59,12 +59,9 @@ public class InteracaoMB implements Serializable{
     }
     
     
-    public void salvar(){
-        
-    }
     
     public void gerarListaInteracao() {
-        String sql = "Select i from Interacao i order by i.chamado.idchamado =" + chamado.getIdchamado();
+        String sql = "select i from Interacao i where i.chamado.idchamado=" + chamado.getIdchamado();
         InteracaoFacade interacaoFacade = new InteracaoFacade();
         listaInteracao = interacaoFacade.listar(sql);
         if (listaInteracao == null) {
