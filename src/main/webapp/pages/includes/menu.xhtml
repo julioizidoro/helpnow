@@ -3,6 +3,14 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+        <img src="../../resources/img/carregarPagina.gif" />
+    </p:dialog>
+    <p:commandLink action="#{usuarioLogadoMB.deslogar()}" class="deslogar">
+        <img src="../../resources/img/sair.png"/>
+    </p:commandLink>
     <div id="tudo">
         <img src="../../resources/img/HelpNow.png" /> 
     </div>

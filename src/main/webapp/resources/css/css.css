@@ -10,7 +10,7 @@ h1 {
     margin: 10px 20px 10px 20px;
 }
 #tudo{
-    margin-top:2%;
+    margin-top:0%;
     width:80%;
     margin-left: 10%;
     background: #ffffff;
@@ -57,4 +57,8 @@ h1 {
     text-decoration: none;
     color: #1F8871;
     font-size: 14px;
+}
+.deslogar{
+    margin-left:85%;
+    top:-5%;
 }

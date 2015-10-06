@@ -5,6 +5,7 @@ import br.com.travelmate.facade.AreaFacade;
 import br.com.travelmate.facade.ChamadoFacade;
 import br.com.travelmate.model.Area;
 import br.com.travelmate.model.Chamado;
+import br.com.travelmate.model.Interacao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class CadChamadoMB implements Serializable{
     private Chamado chamado;
     private List<Area> listaArea;
     private Area area;
+    private List<Chamado> listaChamado;
     
     public CadChamadoMB() {
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -69,15 +71,31 @@ public class CadChamadoMB implements Serializable{
     public void setUsuarioLogadoMB(UsuarioLogadoMB usuarioLogadoMB) {
         this.usuarioLogadoMB = usuarioLogadoMB;
     }
+
+    public List<Chamado> getListaChamado() {
+        return listaChamado;
+    }
+
+    public void setListaChamado(List<Chamado> listaChamado) {
+        this.listaChamado = listaChamado;
+    }
+    
     
     
     public void gerarListaArea(){
         AreaFacade areaFacade = new AreaFacade();
-        listaArea = areaFacade.listar("");
+        listaArea = areaFacade.listar("select a from Area a order by a.descricao");
         if (listaArea == null) {
             listaArea = new ArrayList<Area>();
         }
         
+    }
+    public void gerarListaChamado() {
+        ChamadoFacade chamadoFacade = new ChamadoFacade();
+        listaChamado = chamadoFacade.listar("");
+        if (listaChamado == null) {
+            listaChamado = new ArrayList<Chamado>();
+        }
     }
     
     public String salvar() {
@@ -91,7 +109,12 @@ public class CadChamadoMB implements Serializable{
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
         chamado = new Chamado();
         RequestContext.getCurrentInstance().closeDialog(null);
-        return "";
+        if (chamado!=null){
+            gerarListaChamado();
+        }else{
+            listaChamado = new ArrayList<Chamado>();
+        }
+        return "consProjeto";
     }
     
     public String cancelar() {

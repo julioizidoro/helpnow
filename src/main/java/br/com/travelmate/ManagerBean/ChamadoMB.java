@@ -43,6 +43,9 @@ public class ChamadoMB implements Serializable{
     }
 
     public List<Chamado> getListaChamado() {
+        if(listaChamado==null){
+            gerarListaChamado();
+        }
         return listaChamado;
     }
 
@@ -74,7 +77,10 @@ public class ChamadoMB implements Serializable{
         return "consChamada";
     }
     
-    public String area(){
+    public String interacao(Chamado chamados){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        session.setAttribute("chamados", chamados);
         Map<String,Object> options = new HashMap<String, Object>();
         options.put("contentWidth", 500);
         RequestContext.getCurrentInstance().openDialog("interacao", options, null);

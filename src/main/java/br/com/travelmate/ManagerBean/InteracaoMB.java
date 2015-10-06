@@ -7,8 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 @Named
 @ViewScoped
@@ -20,6 +22,11 @@ public class InteracaoMB implements Serializable{
     
     @PostConstruct
     public void init(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        chamado = (Chamado) session.getAttribute("chamados");
+        session.removeAttribute("chamados");
+        interacao = new Interacao();
         if (interacao!=null){
             gerarListaInteracao();
         }else{
@@ -57,7 +64,7 @@ public class InteracaoMB implements Serializable{
     }
     
     public void gerarListaInteracao() {
-        String sql = "Select i from Interacao i order by i.chamado.idchamado =" + interacao.getChamado().getIdchamado();
+        String sql = "Select i from Interacao i order by i.chamado.idchamado =" + chamado.getIdchamado();
         InteracaoFacade interacaoFacade = new InteracaoFacade();
         listaInteracao = interacaoFacade.listar(sql);
         if (listaInteracao == null) {

@@ -10,7 +10,7 @@
             <h:form id="consultaChamado">
                 <div id="centro">
                     
-                    <p:commandLink action="#{chamadoMB.area()}" class="labelAdicionar">
+                    <p:commandLink action="#{chamadoMB.novo()}" class="labelAdicionar">
                         <img src="../../resources/img/novo.png" class="btnAdicionar" />
                     </p:commandLink>
                     <br></br><br></br>
@@ -34,8 +34,8 @@
                         </p:column>
 
                         <p:column headerText=""  style="width: 40px;">
-                            <p:commandLink>
-                                <img src="resources/img/interacao.png" width="37" height="32"/>
+                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}">
+                                <img src="../../resources/img/interacao.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
                     </p:dataTable>

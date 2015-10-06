@@ -15,18 +15,17 @@
         <h:form id="cadChamado">
             <div style="background: #F0FFFF;font-size: 10px;">
                      <br></br>
-                     <p:outputLabel for="descricao" value="Descricão:" style="margin-left:10%;"/>
-                    <p:inputText id="descricao" value="#{chamadoMB.chamado.problema}" style="width:62%;margin-left: 0.7%"/>
+                    <p:outputLabel for="descricao" value="Descricão:" style="margin-left:10%;"/>
+                    <p:inputText id="descricao" value="#{cadChamadoMB.chamado.problema}" style="width:62%;margin-left: 0.7%"/>
                     <br></br>  <br></br>
                     <p:outputLabel for="area" value="Area: " style="margin-left:16% "/>
                     <p:selectOneMenu id="area" value="#{cadChamadoMB.area}" style="width:26%;margin-left: 0.7%" converter="AreaConverter">
                             <f:selectItem itemLabel="Selecione" itemValue="0" noSelectionOption="true"/> 
                             <f:selectItems id="idarea" value="#{cadChamadoMB.listaArea}" var="area" itemLabel="#{area.descricao}" itemValue="#{area}"/>
                             <f:attribute name="listaArea" value="#{cadChamadoMB.listaArea}"/>
-                            <p:ajax event="change" update="cidade"/> 
                     </p:selectOneMenu>
                     
-                    <p:commandLink action="#{cadChamadoMB.salvar()}" style="margin-left:10%;text-decoration: none">
+                    <p:commandLink action="#{cadChamadoMB.salvar()}" style="margin-left:10%;text-decoration: none" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}">
                         <img src="../../resources/img/confirmar.png"/>
                     </p:commandLink>
                     <p:commandLink action="#{cadChamadoMB.cancelar()}" style="margin-left: 3%;text-decoration: none">
