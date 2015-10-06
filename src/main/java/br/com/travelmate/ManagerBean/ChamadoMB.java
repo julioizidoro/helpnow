@@ -78,7 +78,7 @@ public class ChamadoMB implements Serializable{
     public String interacao(Chamado chamados){
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-        session.setAttribute("chamados", chamados);
+        session.setAttribute("chamado", chamados);
         Map<String,Object> options = new HashMap<String, Object>();
         options.put("contentWidth", 500);
         RequestContext.getCurrentInstance().openDialog("interacao", options, null);
