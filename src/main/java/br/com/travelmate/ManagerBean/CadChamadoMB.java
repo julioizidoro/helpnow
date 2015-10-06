@@ -109,12 +109,9 @@ public class CadChamadoMB implements Serializable{
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
         chamado = new Chamado();
         RequestContext.getCurrentInstance().closeDialog(null);
-        if (chamado!=null){
-            gerarListaChamado();
-        }else{
-            listaChamado = new ArrayList<Chamado>();
-        }
-        return "consProjeto";
+        RequestContext.getCurrentInstance().update("@all");
+        gerarListaChamado();
+        return "";
     }
     
     public String cancelar() {

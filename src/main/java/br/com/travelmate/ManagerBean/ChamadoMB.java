@@ -24,13 +24,11 @@ public class ChamadoMB implements Serializable{
     private List<Chamado> listaChamado;
     
     
-    @PostConstruct
-    public void init(){
+   public ChamadoMB() {
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         chamado = (Chamado) session.getAttribute("chamado");
         session.removeAttribute("chamado");
-        gerarListaChamado();
         chamado = new Chamado();
     }
 
