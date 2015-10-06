@@ -24,6 +24,8 @@ public class CadChamadoMB implements Serializable{
     
     @Inject
     private UsuarioLogadoMB usuarioLogadoMB;
+    @Inject
+    private ChamadoMB chamadoMB;
     private Chamado chamado;
     private List<Area> listaArea;
     private Area area;
@@ -108,10 +110,10 @@ public class CadChamadoMB implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
         chamado = new Chamado();
-        RequestContext.getCurrentInstance().closeDialog(null);
+        RequestContext.getCurrentInstance().closeDialog("consChamado");
         RequestContext.getCurrentInstance().update("@all");
-        gerarListaChamado();
-        return "";
+        chamadoMB.getChamado();
+        return "consChamado";
     }
     
     public String cancelar() {
