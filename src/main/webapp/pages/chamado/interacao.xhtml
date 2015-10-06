@@ -18,8 +18,8 @@
                     <br></br><br></br>
                     <p:commandButton value="Adicionar" icon="ui-icon-plusthick" class="botaoDialog" action="#{cadInteracaoMB.salvar(cadInteracaoMB.interacao.chamado)}" />
                     <br></br> <br></br>
-                    <p:carousel id="tabelaInteracao" value="#{cadInteracaoMB.listaInteracao}" var="interacao" itemStyleClass="carousel" style="width:475px;height:145px;" numVisible="1" firstVisible="0">
-                        <h:panelGrid columns="3" style="width:100%" cellpadding="5" columnClasses="label,value">
+                    <p:carousel id="tabelaInteracao" value="#{cadInteracaoMB.listaInteracao}" var="interacao" itemStyleClass="carousel" style="width:470px;" numVisible="1" firstVisible="0">
+                        <h:panelGrid columns="3" style="width:470px;" cellpadding="5" columnClasses="label,value">
                             <h:outputText value="#{interacao.data}" >
                                 <f:convertDateTime   pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
                             </h:outputText>
