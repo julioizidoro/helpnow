@@ -42,5 +42,13 @@ public class ChamadoFacade {
             return null;
         }
     }
+    public void excluir(int idChamado) {
+        chamadoDao = new ChamadoDao();
+        try {
+            chamadoDao.excluir(idChamado);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChamadoFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

@@ -38,4 +38,16 @@ public class ChamadoDao {
         return  lista;
     }
     
+    public void excluir(int idChamado) throws SQLException {
+        EntityManager manager = ConectionFactory.getConnection();
+        manager.getTransaction().begin();
+        Query q = manager.createQuery("Select c from Chamado c where c.idchamado=" + idChamado);
+        if (q.getResultList().size()>0){
+            Chamado chamado = (Chamado) q.getResultList().get(0);
+            manager.remove(chamado);
+        }
+        manager.getTransaction().commit();
+    }
+    
+    
 }
