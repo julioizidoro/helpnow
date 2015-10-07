@@ -98,13 +98,14 @@ public class CadInteracaoMB implements Serializable{
         interacao.setHora(Formatacao.foramtarHoraString());
         interacao.setChamado(chamado);
         interacaoFacede.salvar(interacao);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
+        
         chamados = interacao.getChamado();
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         session.setAttribute("chamado", chamados);
         RequestContext.getCurrentInstance().closeDialog("consChamado");
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
     }
     
     public String cancelar(){

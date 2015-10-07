@@ -80,7 +80,11 @@ public class UsuarioLogadoMB implements Serializable{
             if (usuario==null){
                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Acesso Negado."));
             }else {
-                return "consultaChamado";
+                if(usuario.getDepartamento().equalsIgnoreCase("TI")){
+                     return "consultaChamadoSuporte";
+                }else{
+                    return "consultaChamado";
+                }
             }
         }
         usuario = new Usuario();

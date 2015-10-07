@@ -107,12 +107,11 @@ public class CadChamadoMB implements Serializable{
         chamado.setArea(area);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         chamadoFacade.salvar(chamado);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
         chamado = new Chamado();
         RequestContext.getCurrentInstance().closeDialog("consChamado");
-        RequestContext.getCurrentInstance().update("@all");
         chamadoMB.getChamado();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
         return "consChamado";
     }
     
