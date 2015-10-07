@@ -109,6 +109,7 @@ public class CadChamadoMB implements Serializable{
         chamadoFacade.salvar(chamado);
         chamado = new Chamado();
         RequestContext.getCurrentInstance().closeDialog("consChamado");
+        RequestContext.getCurrentInstance().update(":consultaChamado:tabelaConsultaChamada");
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
         if(usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){

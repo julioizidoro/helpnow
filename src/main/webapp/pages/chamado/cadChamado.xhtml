@@ -14,7 +14,7 @@
     <h:body>
         <h:form id="cadChamado">
             <div style="background: #F0FFFF;font-size: 10px;">
-                     <br></br>
+                     <br></br><br></br>
                     <p:outputLabel for="descricao" value="Descricão:" style="margin-left:10%;"/>
                     <p:inputText id="descricao" value="#{cadChamadoMB.chamado.problema}" style="width:62%;margin-left: 0.7%"/>
                     <br></br>  <br></br>
@@ -25,13 +25,13 @@
                             <f:attribute name="listaArea" value="#{cadChamadoMB.listaArea}"/>
                     </p:selectOneMenu>
                     
-                    <p:commandLink action="#{cadChamadoMB.salvar()}" style="margin-left:10%;text-decoration: none" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}">
+                    <p:commandLink action="#{cadChamadoMB.salvar()}" style="margin-left:10%;text-decoration: none" >
                         <img src="../../resources/img/confirmar.png"/>
                     </p:commandLink>
                     <p:commandLink action="#{cadChamadoMB.cancelar()}" style="margin-left: 3%;text-decoration: none">
                         <img src="../../resources/img/cancelar.png"/>
                     </p:commandLink>
-                    <br></br> <br></br> 
+                    <br></br> <br></br> <br></br>
                  </div>
             </h:form>
     </h:body>
