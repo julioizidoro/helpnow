@@ -66,7 +66,8 @@ public class UsuarioLogadoMB implements Serializable{
 
     public String validarUsuario(){
         if ((usuario.getLogin()==null) && (usuario.getSenha()==null)){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Acesso Negado."));
+            FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
         }else{
             String senha = "";
             try {
@@ -78,7 +79,8 @@ public class UsuarioLogadoMB implements Serializable{
             UsuarioFacade usuarioFacade = new UsuarioFacade();
             usuario = usuarioFacade.consultar(usuario.getLogin(), usuario.getSenha());
             if (usuario==null){
-               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Acesso Negado."));
+              FacesContext context = FacesContext.getCurrentInstance();
+              context.addMessage(null, new FacesMessage("Login Invalido", "Erro!"));
             }else {
                 if(usuario.getDepartamento().equalsIgnoreCase("TI")){
                      return "consultaChamadoSuporte";
@@ -94,17 +96,19 @@ public class UsuarioLogadoMB implements Serializable{
     
      public void erroLogin(String mensagem) {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(mensagem, ""));
+             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
     }
      
     public void validarTrocarSenha(){
         if ((usuario.getLogin()!=null) && (usuario.getSenha()==null)){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Login Invalido."));
+            FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage("Login Invalido", "Erro!"));
         }else{
             UsuarioFacade usuarioFacade = new UsuarioFacade();
             usuario = usuarioFacade.consultar(usuario.getLogin(), usuario.getSenha());
             if (usuario==null){
-               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Acesso Negado."));
+               FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
             }
         }
     }
@@ -121,11 +125,13 @@ public class UsuarioLogadoMB implements Serializable{
             } else {
                 novaSenha = "";
                 confirmaNovaSenha = "";
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Acesso Negado."));
+                FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
             }
 
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Acesso Negado."));
+            FacesContext context = FacesContext.getCurrentInstance();
+             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
         }
         return "";
     }

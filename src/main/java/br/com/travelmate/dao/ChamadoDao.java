@@ -29,4 +29,13 @@ public class ChamadoDao {
         return  lista;
     }
     
+    public List<Chamado> listarUsuario(String sql)throws SQLException{
+        EntityManager manager = ConectionFactory.getConnection();
+        manager.getTransaction().begin();
+        Query q = manager.createQuery(sql);
+        List<Chamado> lista = q.getResultList();
+        manager.getTransaction().commit();
+        return  lista;
+    }
+    
 }

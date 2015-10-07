@@ -33,4 +33,14 @@ public class ChamadoFacade {
         }
     }
     
+    public List<Chamado> listarUsuario(String sql) {
+        chamadoDao = new ChamadoDao();
+        try {
+            return chamadoDao.listar(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChamadoFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
 }

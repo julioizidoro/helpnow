@@ -13,6 +13,7 @@
 
     <h:body >
             <h:form id="login" class="login">
+                <p:growl id="growl" showDetail="true" sticky="true" />
                 <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
                 <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
@@ -31,7 +32,7 @@
                     <br></br>
                     <p:inputText value="#{usuarioLogadoMB.usuario.senha}" type="password"  size="40" class="espacologin"/>
                      <br></br><br></br>
-                     <p:commandButton value="Login" class="loginButton" action="#{usuarioLogadoMB.validarUsuario()}"/>
+                     <p:commandButton value="Login" class="loginButton" action="#{usuarioLogadoMB.validarUsuario()}" update="growl"/>
                     <p:commandButton value="Alterar Senha" action="#{usuarioLogadoMB.validarTrocarSenha()}" class="loginButton2"  oncomplete="PF('dll').show()"  />
                                 
                     <br></br><br></br><br></br><br></br><br></br>

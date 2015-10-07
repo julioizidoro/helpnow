@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
@@ -20,8 +21,11 @@ import org.primefaces.context.RequestContext;
 @ViewScoped
 public class ChamadoMB implements Serializable{
     
+    @Inject
+    private UsuarioLogadoMB usuarioLogadoMB;
     private Chamado chamado;
     private List<Chamado> listaChamado;
+    private List<Chamado> listaChamadoUsuario;
     
     
    public ChamadoMB() {
@@ -51,6 +55,25 @@ public class ChamadoMB implements Serializable{
         this.listaChamado = listaChamado;
     }
 
+    public UsuarioLogadoMB getUsuarioLogadoMB() {
+        return usuarioLogadoMB;
+    }
+
+    public void setUsuarioLogadoMB(UsuarioLogadoMB usuarioLogadoMB) {
+        this.usuarioLogadoMB = usuarioLogadoMB;
+    }
+
+    public List<Chamado> getListaChamadoUsuario() {
+        if(listaChamadoUsuario==null){
+            gerarListaChamadoUsuario();
+        }
+        return listaChamadoUsuario;
+    }
+
+    public void setListaChamadoUsuario(List<Chamado> listaChamadoUsuario) {
+        this.listaChamadoUsuario = listaChamadoUsuario;
+    }
+
     
     
     
@@ -59,6 +82,14 @@ public class ChamadoMB implements Serializable{
         listaChamado = chamadoFacade.listar("");
         if (listaChamado == null) {
             listaChamado = new ArrayList<Chamado>();
+        }
+    }
+    
+    public void gerarListaChamadoUsuario() {
+        ChamadoFacade chamadoFacade = new ChamadoFacade();
+        listaChamadoUsuario = chamadoFacade.listarUsuario("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario());
+        if (listaChamadoUsuario == null) {
+            listaChamadoUsuario = new ArrayList<Chamado>();
         }
     }
     
