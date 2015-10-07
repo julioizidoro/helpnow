@@ -33,7 +33,9 @@ public class ChamadoMB implements Serializable{
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         chamado = (Chamado) session.getAttribute("chamado");
         session.removeAttribute("chamado");
+        gerarListaChamado();
         chamado = new Chamado();
+        
     }
 
     public Chamado getChamado() {
@@ -124,5 +126,15 @@ public class ChamadoMB implements Serializable{
         chamado.setSituacao("Processo");
         chamadoFacade.salvar(chamado);
         return "consSupChamado";
+    }
+    
+    public String finalizar(Chamado chamado){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        session.setAttribute("chamado", chamado);
+        ChamadoFacade chamadoFacade = new ChamadoFacade();
+        chamado.setSituacao("Finalizado");
+        chamadoFacade.salvar(chamado);
+       return "consSupChamado"; 
     }
 }
