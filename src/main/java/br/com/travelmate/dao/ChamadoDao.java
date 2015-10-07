@@ -23,7 +23,7 @@ public class ChamadoDao {
     public List<Chamado> listar(String nome)throws SQLException{
         EntityManager manager = ConectionFactory.getConnection();
         manager.getTransaction().begin();
-        Query q = manager.createQuery("select c from Chamado c order by c.dataabertura");
+        Query q = manager.createQuery("select c from Chamado c where c.situacao='Aguardo' and c.situacao='Processo'");
         List<Chamado> lista = q.getResultList();
         manager.getTransaction().commit();
         return  lista;
