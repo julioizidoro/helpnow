@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -123,18 +124,22 @@ public class ChamadoMB implements Serializable{
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         session.setAttribute("chamado", chamados);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamado.setSituacao("Processo");
-        chamadoFacade.salvar(chamado);
+        chamados.setSituacao("Processo");
+        chamadoFacade.salvar(chamados);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Chamada Iniciada ", "Sucesso"));
         return "consSupChamado";
     }
     
-    public String finalizar(Chamado chamado){
+    public String finalizar(Chamado chamados){
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-        session.setAttribute("chamado", chamado);
+        session.setAttribute("chamado", chamados);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamado.setSituacao("Finalizado");
-        chamadoFacade.salvar(chamado);
+        chamados.setSituacao("Finalizado");
+        chamadoFacade.salvar(chamados);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
        return "consSupChamado"; 
     }
 }
