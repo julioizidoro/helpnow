@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/pages/templates/default.xhtml">
+        <ui:define name="corpo">
+            <h:form id="consultaChamado">
+                <div id="centro">
+                    
+                    <p:commandLink action="#{chamadoMB.novo()}" class="labelAdicionar">
+                        <img src="../../resources/img/novo.png" class="btnAdicionar" />
+                    </p:commandLink>
+                    <br></br><br></br>
+                    <p:dataTable var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                 paginator="true" rows="7"    rowIndexVar="rowIx">
+
+                        <p:column headerText="Problema"  >
+                            <h:outputText value="#{tabelaChamado.problema}" />
+                        </p:column>
+                        <p:column headerText="Situação"  style="width: 80px;">
+                            <h:outputText value="#{tabelaChamado.situacao}" />
+                        </p:column>
+                        <p:column headerText="Area" style="width:120px;" >
+                            <h:outputText value="#{tabelaChamado.area.descricao}" />
+                        </p:column>
+                        <p:column headerText="Data de Abertura" style="width: 105px;" >
+                            <h:outputText value="#{tabelaChamado.dataabertura}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText=""  style="width: 40px;">
+                            <p:commandLink >
+                                <img src="../../resources/img/interacao.png" width="37" height="32"/>
+                            </p:commandLink>
+                        </p:column>
+                        <p:column headerText=""  style="width: 40px;">
+                            <p:commandLink >
+                                <img src="../../resources/img/concluir.png"width="37" height="32"/>
+                            </p:commandLink>
+                        </p:column>
+                        <p:column headerText=""  style="width: 40px;">
+                            <p:commandLink >
+                                
+                                <img src="../../resources/img/cancelar.png"width="37" height="32"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                    <br></br>
+                    <br></br>
+                </div>
+            </h:form>     
+           
+        </ui:define>
+    </ui:composition>
+</html>
