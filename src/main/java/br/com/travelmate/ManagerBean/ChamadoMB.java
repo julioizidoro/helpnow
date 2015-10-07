@@ -142,4 +142,21 @@ public class ChamadoMB implements Serializable{
         context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
        return "consSupChamado"; 
     }
+    
+    public String concluir(Chamado chamado){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        session.setAttribute("chamado", chamado);
+        if(chamado.getSituacao().equalsIgnoreCase("Finalizado")){
+            ChamadoFacade chamadoFacade = new ChamadoFacade();
+            chamadoFacade.excluir(chamado.getIdchamado());
+            gerarListaChamadoUsuario();
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Chamada Concluída", ""));
+        }else{
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Aguarde!", "Chamada não Finalizada"));
+        }
+        return "consChamado";
+    }
 }

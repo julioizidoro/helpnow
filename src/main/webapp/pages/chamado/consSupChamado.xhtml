@@ -21,16 +21,16 @@
                         <p:column headerText="Problema"  >
                             <h:outputText value="#{tabelaChamado.problema}" />
                         </p:column>
-                         <p:column headerText="Usuario" style="width:80px;"  >
+                         <p:column headerText="Usuario" style="width:120px;"  >
                             <h:outputText value="#{tabelaChamado.usuario.nome}" />
                         </p:column>
-                        <p:column headerText="Situação"  style="width: 80px;">
+                        <p:column headerText="Situação"  style="width:70px;">
                             <h:outputText value="#{tabelaChamado.situacao}" />
                         </p:column>
-                        <p:column headerText="Area" style="width:80px;" >
+                        <p:column headerText="Area" style="width:75px;" >
                             <h:outputText value="#{tabelaChamado.area.descricao}" />
                         </p:column>
-                        <p:column headerText="Data de Abertura" style="width: 100px;" >
+                        <p:column headerText="Data de Abertura" style="width:60px;" >
                             <h:outputText value="#{tabelaChamado.dataabertura}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
                             </h:outputText>
@@ -42,12 +42,12 @@
                             </p:commandLink>
                         </p:column>
                         <p:column headerText=""  style="width: 40px;" >
-                            <p:commandLink action="#{chamadoMB.iniciar(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}">
+                            <p:commandLink action="#{chamadoMB.iniciar(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Iniciar">
                                 <img src="../../resources/img/iniciar.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
                         <p:column headerText=""  style="width: 40px;" >
-                            <p:commandLink action="#{chamadoMB.finalizar(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}">
+                            <p:commandLink action="#{chamadoMB.finalizar(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Finalizar">
                                 <img src="../../resources/img/concluir.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
