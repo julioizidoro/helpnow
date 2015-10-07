@@ -136,10 +136,15 @@ public class ChamadoMB implements Serializable{
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         session.setAttribute("chamado", chamados);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamados.setSituacao("Finalizado");
-        chamadoFacade.salvar(chamados);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
+        if(chamados.getSituacao().equalsIgnoreCase("Processo")){
+            chamados.setSituacao("Finalizado");
+            chamadoFacade.salvar(chamados);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
+        }else{
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Atenção", "Está chamada não foi iniciada."));
+        }
        return "consSupChamado"; 
     }
     
