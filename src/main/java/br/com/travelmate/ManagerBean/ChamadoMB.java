@@ -115,4 +115,14 @@ public class ChamadoMB implements Serializable{
         RequestContext.getCurrentInstance().openDialog("interacao", options, null);
         return "";
     }
+    
+    public String iniciar(Chamado chamados){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        session.setAttribute("chamado", chamados);
+        ChamadoFacade chamadoFacade = new ChamadoFacade();
+        chamado.setSituacao("Processo");
+        chamadoFacade.salvar(chamado);
+        return "consSupChamado";
+    }
 }
