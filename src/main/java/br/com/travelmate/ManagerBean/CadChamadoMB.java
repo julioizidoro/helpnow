@@ -109,10 +109,15 @@ public class CadChamadoMB implements Serializable{
         chamadoFacade.salvar(chamado);
         chamado = new Chamado();
         RequestContext.getCurrentInstance().closeDialog("consChamado");
-        chamadoMB.getChamado();
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
-        return "consChamado";
+        if(usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
+            chamadoMB.gerarListaChamado();
+            return "consultaChamadoSuporte";
+        }else{
+            chamadoMB.gerarListaChamadoUsuario();
+            return "consultaChamado";
+        }
     }
     
     public String cancelar() {
