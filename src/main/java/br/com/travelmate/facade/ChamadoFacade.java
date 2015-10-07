@@ -23,10 +23,10 @@ public class ChamadoFacade {
     }
     
     
-    public List<Chamado> listar(String nome) {
+    public List<Chamado> listar(String sql) {
         chamadoDao = new ChamadoDao();
         try {
-            return chamadoDao.listar(nome);
+            return chamadoDao.listar(sql);
         } catch (SQLException ex) {
             Logger.getLogger(ChamadoFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;

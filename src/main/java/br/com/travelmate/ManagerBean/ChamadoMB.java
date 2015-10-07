@@ -81,7 +81,7 @@ public class ChamadoMB implements Serializable{
     
     public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        listaChamado = chamadoFacade.listar("");
+        listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'");
         if (listaChamado == null) {
             listaChamado = new ArrayList<Chamado>();
         }

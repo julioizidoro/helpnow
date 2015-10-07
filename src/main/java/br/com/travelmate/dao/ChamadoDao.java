@@ -20,10 +20,10 @@ public class ChamadoDao {
         return chamado;
     }
     
-    public List<Chamado> listar(String nome)throws SQLException{
+    public List<Chamado> listar(String sql)throws SQLException{
         EntityManager manager = ConectionFactory.getConnection();
         manager.getTransaction().begin();
-        Query q = manager.createQuery("select c from Chamado c where c.situacao='Aguardo' and c.situacao='Processo'");
+        Query q = manager.createQuery(sql);
         List<Chamado> lista = q.getResultList();
         manager.getTransaction().commit();
         return  lista;
