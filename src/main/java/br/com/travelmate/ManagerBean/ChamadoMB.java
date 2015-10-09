@@ -1,7 +1,6 @@
 package br.com.travelmate.ManagerBean;
 
 import br.com.travelmate.facade.ChamadoFacade;
-import br.com.travelmate.model.Area;
 import br.com.travelmate.model.Chamado;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.ViewHandler;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -24,27 +26,15 @@ public class ChamadoMB implements Serializable{
     
     @Inject
     private UsuarioLogadoMB usuarioLogadoMB;
-    private Chamado chamado;
     private List<Chamado> listaChamado;
-    private List<Chamado> listaChamadoUsuario;
     
     
-   public ChamadoMB() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-        chamado = (Chamado) session.getAttribute("chamado");
-        session.removeAttribute("chamado");
+   @PostConstruct
+    public void init(){
+        getUsuarioLogadoMB();
         gerarListaChamado();
-        chamado = new Chamado();
+        refresh();
         
-    }
-
-    public Chamado getChamado() {
-        return chamado;
-    }
-
-    public void setChamado(Chamado chamado) {
-        this.chamado = chamado;
     }
 
     public List<Chamado> getListaChamado() {
@@ -64,49 +54,27 @@ public class ChamadoMB implements Serializable{
 
     public void setUsuarioLogadoMB(UsuarioLogadoMB usuarioLogadoMB) {
         this.usuarioLogadoMB = usuarioLogadoMB;
-    }
-
-    public List<Chamado> getListaChamadoUsuario() {
-        if(listaChamadoUsuario==null){
-            gerarListaChamadoUsuario();
-        }
-        return listaChamadoUsuario;
-    }
-
-    public void setListaChamadoUsuario(List<Chamado> listaChamadoUsuario) {
-        this.listaChamadoUsuario = listaChamadoUsuario;
-    }
-
-    
-    
+    }   
     
     public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'");
+        if (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
+            listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'");
+        }else {
+            listaChamado = chamadoFacade.listarUsuario("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario());
+        }
         if (listaChamado == null) {
             listaChamado = new ArrayList<Chamado>();
         }
     }
     
-    public void gerarListaChamadoUsuario() {
-        ChamadoFacade chamadoFacade = new ChamadoFacade();
-        listaChamadoUsuario = chamadoFacade.listarUsuario("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario());
-        if (listaChamadoUsuario == null) {
-            listaChamadoUsuario = new ArrayList<Chamado>();
-        }
-    }
+    
     
     public String novo(){
-        chamado = new Chamado();
         Map<String,Object> options = new HashMap<String, Object>();
-        options.put("contentWidth", 430);
+        options.put("contentWidth", 525);
         RequestContext.getCurrentInstance().openDialog("cadastrochamado", options, null);
         return "";
-    }
-    
-    
-    public String voltar(){
-        return "consChamada";
     }
     
     public String interacao(Chamado chamados){
@@ -155,7 +123,7 @@ public class ChamadoMB implements Serializable{
         if(chamado.getSituacao().equalsIgnoreCase("Finalizado")){
             ChamadoFacade chamadoFacade = new ChamadoFacade();
             chamadoFacade.excluir(chamado.getIdchamado());
-            gerarListaChamadoUsuario();
+            gerarListaChamado();
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Chamada Concluída", ""));
         }else{
@@ -163,5 +131,14 @@ public class ChamadoMB implements Serializable{
             context.addMessage(null, new FacesMessage("Aguarde!", "Chamada não Finalizada"));
         }
         return "consChamado";
+    }
+    
+    public void refresh() {  
+        FacesContext context = FacesContext.getCurrentInstance();  
+        Application application = context.getApplication();  
+        ViewHandler viewHandler = application.getViewHandler();  
+        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());  
+        context.setViewRoot(viewRoot);  
+        context.renderResponse();  
     }
 }

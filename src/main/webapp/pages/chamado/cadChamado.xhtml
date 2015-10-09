@@ -16,7 +16,7 @@
             <div style="background: #F0FFFF;font-size: 10px;">
                      <br></br><br></br>
                     <p:outputLabel for="descricao" value="Descricão:" style="margin-left:10%;"/>
-                    <p:inputText id="descricao" value="#{cadChamadoMB.chamado.problema}" style="width:62%;margin-left: 0.7%"/>
+                    <p:inputTextarea id="descricao" value="#{cadChamadoMB.chamado.problema}" style="margin-left: 0.7%" rows="5" cols="65"/>
                     <br></br>  <br></br>
                     <p:outputLabel for="area" value="Area: " style="margin-left:16% "/>
                     <p:selectOneMenu id="area" value="#{cadChamadoMB.area}" style="width:26%;margin-left: 0.7%" converter="AreaConverter">

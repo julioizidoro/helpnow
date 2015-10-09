@@ -5,16 +5,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <ui:composition template="/pages/templates/default.xhtml">
+         
+ <ui:composition template="/pages/templates/default.xhtml">
         <ui:define name="corpo">
             <h:form id="consultaChamado">
                 <div id="centro">
-                    
+                    <br></br>
                     <p:commandLink action="#{chamadoMB.novo()}" class="labelAdicionar">
                         <img src="../../resources/img/novo.png" class="btnAdicionar" />
                     </p:commandLink>
-                    <br></br><br></br>
-                    <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamadoUsuario}" class="tabelaArea"
+                    <br></br>
+                    <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                  paginator="true" rows="7"    rowIndexVar="rowIx">
 

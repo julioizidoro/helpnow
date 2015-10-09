@@ -5,7 +5,6 @@ import br.com.travelmate.facade.AreaFacade;
 import br.com.travelmate.facade.ChamadoFacade;
 import br.com.travelmate.model.Area;
 import br.com.travelmate.model.Chamado;
-import br.com.travelmate.model.Interacao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,8 +23,6 @@ public class CadChamadoMB implements Serializable{
     
     @Inject
     private UsuarioLogadoMB usuarioLogadoMB;
-    @Inject
-    private ChamadoMB chamadoMB;
     private Chamado chamado;
     private List<Area> listaArea;
     private Area area;
@@ -107,16 +104,13 @@ public class CadChamadoMB implements Serializable{
         chamado.setArea(area);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         chamadoFacade.salvar(chamado);
-        chamado = new Chamado();
         RequestContext.getCurrentInstance().closeDialog("consChamado");
         RequestContext.getCurrentInstance().update(":consultaChamado:tabelaConsultaChamada");
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
         if(usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
-            chamadoMB.gerarListaChamado();
             return "consultaChamadoSuporte";
         }else{
-            chamadoMB.gerarListaChamadoUsuario();
             return "consultaChamado";
         }
     }
