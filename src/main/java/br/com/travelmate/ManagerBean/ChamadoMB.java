@@ -77,15 +77,23 @@ public class ChamadoMB implements Serializable{
         return "";
     }
     
-    public String interacao(Chamado chamados){
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-        session.setAttribute("chamado", chamados);
-        Map<String,Object> options = new HashMap<String, Object>();
-        options.put("contentWidth", 500);
-        RequestContext.getCurrentInstance().openDialog("interacao", options, null);
-        return "";
+    public String interacao(Chamado chamados){  
+        if(chamados.getSituacao().equalsIgnoreCase("Processo")){
+          FacesContext fc = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+            session.setAttribute("chamado", chamados);
+            Map<String,Object> options = new HashMap<String, Object>();
+            options.put("contentWidth", 500);
+            RequestContext.getCurrentInstance().openDialog("interacao", options, null);
+        }else{
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Atenção", "Está chamada não foi iniciada."));
+        }
+       
+        return ""; 
     }
+          
+        
     
     public String iniciar(Chamado chamados){
         FacesContext fc = FacesContext.getCurrentInstance();

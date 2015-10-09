@@ -37,7 +37,7 @@
                         </p:column>
 
                         <p:column headerText=""  style="width: 40px;">
-                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}">
+                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}"  >
                                 <img src="../../resources/img/interacao.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
