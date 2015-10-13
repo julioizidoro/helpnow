@@ -42,7 +42,7 @@
                             </p:commandLink>
                         </p:column>
                         <p:column headerText=""  style="width: 40px;" >
-                            <p:commandLink action="#{chamadoMB.iniciar(tabelaChamado)}"  title="Iniciar" update=":consultaChamado:tabelaConsultaChamada">
+                            <p:commandLink  title="Iniciar" update=":consultaChamado:tabelaConsultaChamada"  action="#{chamadoMB.abrirDialog(tabelaChamado)}">
                                 <img src="../../resources/img/iniciar.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
@@ -55,6 +55,9 @@
                     <br></br>
                     <br></br>
                 </div>
+                <p:dialog header="Iniciar chamado" widgetVar="iniciarChamado" modal="true" width="400">
+                    
+                </p:dialog>
             </h:form>     
            
         </ui:define>

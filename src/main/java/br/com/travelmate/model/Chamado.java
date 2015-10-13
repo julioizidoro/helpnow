@@ -51,6 +51,9 @@ public class Chamado implements Serializable {
     @Size(max = 30)
     @Column(name = "situacao")
     private String situacao;
+    @Size(max = 30)
+    @Column(name = "prioridade")
+    private String prioridade;
     @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
@@ -123,6 +126,15 @@ public class Chamado implements Serializable {
         this.interacaoList = interacaoList;
     }
 
+    public String getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(String prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

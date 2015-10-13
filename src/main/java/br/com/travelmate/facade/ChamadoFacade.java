@@ -2,6 +2,7 @@ package br.com.travelmate.facade;
 
 import br.com.travelmate.dao.ChamadoDao;
 import br.com.travelmate.model.Chamado;
+import br.com.travelmate.model.Usuario;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,10 +34,11 @@ public class ChamadoFacade {
         }
     }
     
-    public List<Chamado> listarUsuario(String sql) {
+    
+    public List<Usuario> listarUsuario(String sql) {
         chamadoDao = new ChamadoDao();
         try {
-            return chamadoDao.listar(sql);
+            return chamadoDao.listarUsuario(sql);
         } catch (SQLException ex) {
             Logger.getLogger(ChamadoFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Iniciar Chamado</title>
+        <link href="resources/css/css.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <h:form id="cadChamado">
+            <div style="background: #F0FFFF;font-size: 10px;"> <br></br><br></br>
+                <p:outputLabel for="executor" value="Executor:" style="margin-left: 5%"/>
+                <p:selectOneMenu id="executor" value="#{iniciarChamadoMB.usuarioExecutor}" converter="UsuarioConverter" style="margin-left:2%;width:70%">
+                    <f:selectItems id="idarea" value="#{iniciarChamadoMB.listaExecutor}" var="executor" itemLabel="#{executor.nome}" itemValue="#{executor}"/>
+                    <f:attribute name="listaExecutor" value="#{iniciarChamadoMB.listaExecutor}"/>
+                </p:selectOneMenu>
+                <br></br><br></br><br></br>
+                <p:outputLabel for="prioridade" value="Prioridade:" style="margin-left:3%"/>
+                <p:selectOneMenu id="prioridade" value="#{iniciarChamadoMB.chamado.prioridade}" style="margin-left:2%;width:47%">
+                    <f:selectItem itemLabel="#{iniciarChamadoMB.chamado.prioridade}" itemValue="#{iniciarChamadoMB.chamado.prioridade}" noSelectionOption="true"/> 
+                    <f:selectItem itemLabel="Normal" itemValue="normal" /> 
+                    <f:selectItem itemLabel="Alta" itemValue="alta" /> 
+                    <f:selectItem itemLabel="Urgente" itemValue="urgente" /> 
+                </p:selectOneMenu>
+                <p:commandButton value="Iniciar" icon="	ui-icon-play" action="#{iniciarChamadoMB.iniciar()}" style="margin-left:7%"/>
+          <br></br><br></br><br></br>
+            </div>
+        </h:form>
+    </h:body>
+</html>

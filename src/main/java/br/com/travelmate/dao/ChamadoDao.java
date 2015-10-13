@@ -2,6 +2,7 @@ package br.com.travelmate.dao;
 
 import br.com.travelmate.connection.ConectionFactory;
 import br.com.travelmate.model.Chamado;
+import br.com.travelmate.model.Usuario;
 import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -29,11 +30,11 @@ public class ChamadoDao {
         return  lista;
     }
     
-    public List<Chamado> listarUsuario(String sql)throws SQLException{
+    public List<Usuario> listarUsuario(String sql)throws SQLException{
         EntityManager manager = ConectionFactory.getConnection();
         manager.getTransaction().begin();
         Query q = manager.createQuery(sql);
-        List<Chamado> lista = q.getResultList();
+        List<Usuario> lista = q.getResultList();
         manager.getTransaction().commit();
         return  lista;
     }

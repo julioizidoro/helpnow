@@ -103,6 +103,7 @@ public class CadChamadoMB implements Serializable{
         chamado.setDataabertura(new Date());
         chamado.setUsuario(usuarioLogadoMB.getUsuario());
         chamado.setArea(area);
+        chamado.setProblema("definir");
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         chamadoFacade.salvar(chamado);
         RequestContext.getCurrentInstance().closeDialog("consChamado");

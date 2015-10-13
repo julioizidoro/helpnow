@@ -29,8 +29,9 @@ public class ChamadoMB implements Serializable{
     
     @Inject
     private UsuarioLogadoMB usuarioLogadoMB;
+    
     private List<Chamado> listaChamado;
-    private Usuario UsuarioExecutor;
+    
     
     
    @PostConstruct
@@ -59,21 +60,15 @@ public class ChamadoMB implements Serializable{
     public void setUsuarioLogadoMB(UsuarioLogadoMB usuarioLogadoMB) {
         this.usuarioLogadoMB = usuarioLogadoMB;
     }   
-
-    public Usuario getUsuarioExecutor() {
-        return UsuarioExecutor;
-    }
-
-    public void setUsuarioExecutor(Usuario UsuarioExecutor) {
-        this.UsuarioExecutor = UsuarioExecutor;
-    }
+    
+    
     
     public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         if (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
             listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'");
         }else {
-            listaChamado = chamadoFacade.listarUsuario("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario());
+            listaChamado = chamadoFacade.listar("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario());
         }
         if (listaChamado == null) {
             listaChamado = new ArrayList<Chamado>();
@@ -105,26 +100,15 @@ public class ChamadoMB implements Serializable{
         return ""; 
     }
           
-        
-    
-    public String iniciar(Chamado chamados){
+    public void abrirDialog(Chamado chamados) {
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         session.setAttribute("chamado", chamados);
-        ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamados.setSituacao("Processo");
-        chamadoFacade.salvar(chamados);
-        Executor executor = new Executor();
-        executor.setChamado(chamados);
-        executor.setNotificado("NAO");
-        executor.setUsuario(UsuarioExecutor);
-        ExecutorFacade executorFacade = new ExecutorFacade();
-        executorFacade.salvar(executor);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Chamada Iniciada ", "Sucesso"));
-        gerarListaChamado();
-        return "consSupChamado";
+        Map<String,Object> options = new HashMap<String, Object>();
+        options.put("contentWidth", 430);
+        RequestContext.getCurrentInstance().openDialog("executor", options, null);
     }
+
     
     public String finalizar(Chamado chamados){
         FacesContext fc = FacesContext.getCurrentInstance();

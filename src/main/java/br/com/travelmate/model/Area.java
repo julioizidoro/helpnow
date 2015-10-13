@@ -34,6 +34,7 @@ public class Area implements Serializable {
     @Size(max = 50)
     @Column(name = "descricao")
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "area")
     private List<Chamado> chamadoList;
 
