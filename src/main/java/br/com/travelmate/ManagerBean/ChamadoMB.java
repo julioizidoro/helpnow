@@ -1,7 +1,10 @@
 package br.com.travelmate.ManagerBean;
 
 import br.com.travelmate.facade.ChamadoFacade;
+import br.com.travelmate.facade.ExecutorFacade;
 import br.com.travelmate.model.Chamado;
+import br.com.travelmate.model.Executor;
+import br.com.travelmate.model.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +30,7 @@ public class ChamadoMB implements Serializable{
     @Inject
     private UsuarioLogadoMB usuarioLogadoMB;
     private List<Chamado> listaChamado;
+    private Usuario UsuarioExecutor;
     
     
    @PostConstruct
@@ -55,6 +59,14 @@ public class ChamadoMB implements Serializable{
     public void setUsuarioLogadoMB(UsuarioLogadoMB usuarioLogadoMB) {
         this.usuarioLogadoMB = usuarioLogadoMB;
     }   
+
+    public Usuario getUsuarioExecutor() {
+        return UsuarioExecutor;
+    }
+
+    public void setUsuarioExecutor(Usuario UsuarioExecutor) {
+        this.UsuarioExecutor = UsuarioExecutor;
+    }
     
     public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
@@ -102,8 +114,15 @@ public class ChamadoMB implements Serializable{
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         chamados.setSituacao("Processo");
         chamadoFacade.salvar(chamados);
+        Executor executor = new Executor();
+        executor.setChamado(chamados);
+        executor.setNotificado("NAO");
+        executor.setUsuario(UsuarioExecutor);
+        ExecutorFacade executorFacade = new ExecutorFacade();
+        executorFacade.salvar(executor);
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Chamada Iniciada ", "Sucesso"));
+        gerarListaChamado();
         return "consSupChamado";
     }
     

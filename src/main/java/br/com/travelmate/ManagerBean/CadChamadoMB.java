@@ -28,6 +28,7 @@ public class CadChamadoMB implements Serializable{
     private Area area;
     private List<Chamado> listaChamado;
     
+    
     public CadChamadoMB() {
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);

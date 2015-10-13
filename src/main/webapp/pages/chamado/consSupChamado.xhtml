@@ -42,7 +42,7 @@
                             </p:commandLink>
                         </p:column>
                         <p:column headerText=""  style="width: 40px;" >
-                            <p:commandLink action="#{chamadoMB.iniciar(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Iniciar">
+                            <p:commandLink action="#{chamadoMB.iniciar(tabelaChamado)}"  title="Iniciar" update=":consultaChamado:tabelaConsultaChamada">
                                 <img src="../../resources/img/iniciar.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>

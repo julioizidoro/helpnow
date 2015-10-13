@@ -16,8 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -28,8 +26,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "usuario")
-@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,9 +71,6 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "unidadeNegocio_idunidadeNegocio", referencedColumnName = "idunidadeNegocio")
     @ManyToOne(optional = false)
     private Unidadenegocio unidadenegocio;
-    @JoinColumn(name = "grupoAcesso_idgrupoAcesso", referencedColumnName = "idgrupoAcesso")
-    @ManyToOne(optional = false)
-    private Grupoacesso grupoacesso;
 
     public Usuario() {
     }
@@ -198,13 +191,7 @@ public class Usuario implements Serializable {
         this.unidadenegocio = unidadenegocio;
     }
 
-    public Grupoacesso getGrupoacesso() {
-        return grupoacesso;
-    }
-
-    public void setGrupoacesso(Grupoacesso grupoacesso) {
-        this.grupoacesso = grupoacesso;
-    }
+    
 
     @Override
     public int hashCode() {
