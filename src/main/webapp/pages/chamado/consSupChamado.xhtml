@@ -10,9 +10,11 @@
             <h:form id="consultaChamado">
                 <div id="centro">
                     
-                    <p:commandLink action="#{chamadoMB.novo()}" class="labelAdicionar">
+                    <p:commandLink actionListener="#{chamadoMB.novo()}" class="labelAdicionar" process="@this" update="@none" title="Novo Chamado">
+                        <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialogNovo}" process="@this" update="tabelaConsultaChamada"/>
                         <img src="../../resources/img/novo.png" class="btnAdicionar" />
                     </p:commandLink>
+                    <br></br>
                     <br></br><br></br>
                     <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
@@ -22,7 +24,7 @@
                             <h:outputText value="#{tabelaChamado.problema}" />
                         </p:column>
                          <p:column headerText="Usuario" style="width:120px;"  >
-                            <h:outputText value="#{tabelaChamado.usuario.nome}" />
+                             <h:outputText value="#{tabelaChamado.usuarioabertura.nome}" />
                         </p:column>
                         <p:column headerText="Situação"  style="width:70px;">
                             <h:outputText value="#{tabelaChamado.situacao}" />
@@ -35,19 +37,26 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
                             </h:outputText>
                         </p:column>
-
+                        <p:column headerText="Executor" style="width:120px;" >
+                            <h:outputText value="#{tabelaChamado.usuarioexecutor.nome}" />
+                        </p:column>
+                        <p:column headerText="Prioridade" style="width:60px;" >
+                            <h:outputText value="#{tabelaChamado.prioridade}" />
+                        </p:column>
                         <p:column headerText=""  style="width: 40px;">
-                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}"  >
+                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Intereações"  >
+                                <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/interacao.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
                         <p:column headerText=""  style="width: 40px;" >
-                            <p:commandLink  title="Iniciar" update=":consultaChamado:tabelaConsultaChamada"  action="#{chamadoMB.abrirDialog(tabelaChamado)}">
+                            <p:commandLink  title="Iniciar" action="#{chamadoMB.abrirDialog(tabelaChamado)}">
+                                <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/iniciar.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
                         <p:column headerText=""  style="width: 40px;" >
-                            <p:commandLink action="#{chamadoMB.finalizar(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Finalizar">
+                            <p:commandLink action="#{chamadoMB.finalizar(tabelaChamado, rowIx)}"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Finalizar" update="tabelaConsultaChamada">
                                 <img src="../../resources/img/concluir.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>

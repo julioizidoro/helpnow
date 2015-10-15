@@ -1,15 +1,12 @@
 package br.com.travelmate.ManagerBean;
 
 import br.com.travelmate.facade.ChamadoFacade;
-import br.com.travelmate.facade.ExecutorFacade;
 import br.com.travelmate.model.Chamado;
-import br.com.travelmate.model.Executor;
 import br.com.travelmate.model.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.Executor;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -69,20 +66,14 @@ public class IniciarChamadoMB implements Serializable{
         }
     }
     
-    public String iniciar(){
+    public void iniciar(){
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         chamado.setSituacao("Processo");
-        chamadoFacade.salvar(chamado);
-        Executor executor = new Executor();
-        executor.setChamado(chamado);
-        executor.setNotificado("NAO");
-        executor.setUsuario(UsuarioExecutor);
-        ExecutorFacade executorFacade = new ExecutorFacade();
-        executorFacade.salvar(executor);
+        chamado.setUsuarioexecutor(UsuarioExecutor);
+        chamado = chamadoFacade.salvar(chamado);
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Chamada Iniciada ", "Sucesso"));
-        RequestContext.getCurrentInstance().closeDialog("consSupChamado");
-        return "consSupChamado";
+        RequestContext.getCurrentInstance().closeDialog(chamado);
     }
     
 }

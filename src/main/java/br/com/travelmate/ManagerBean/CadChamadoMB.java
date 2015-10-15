@@ -3,18 +3,17 @@ package br.com.travelmate.ManagerBean;
 
 import br.com.travelmate.facade.AreaFacade;
 import br.com.travelmate.facade.ChamadoFacade;
+import br.com.travelmate.facade.UsuarioFacade;
 import br.com.travelmate.model.Area;
 import br.com.travelmate.model.Chamado;
+import br.com.travelmate.model.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
 @Named
@@ -26,20 +25,15 @@ public class CadChamadoMB implements Serializable{
     private Chamado chamado;
     private List<Area> listaArea;
     private Area area;
-    private List<Chamado> listaChamado;
-    
-    
-    public CadChamadoMB() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-        chamado = (Chamado) session.getAttribute("chamado");
-        session.removeAttribute("chamado");
-        gerarListaArea();
-        if (chamado==null){
-            chamado = new Chamado();
-        }
-    }
 
+    public CadChamadoMB() {
+        gerarListaArea();
+        this.chamado = new Chamado();
+    }
+    
+    
+    
+    
     public Chamado getChamado() {
         return chamado;
     }
@@ -71,16 +65,6 @@ public class CadChamadoMB implements Serializable{
     public void setUsuarioLogadoMB(UsuarioLogadoMB usuarioLogadoMB) {
         this.usuarioLogadoMB = usuarioLogadoMB;
     }
-
-    public List<Chamado> getListaChamado() {
-        return listaChamado;
-    }
-
-    public void setListaChamado(List<Chamado> listaChamado) {
-        this.listaChamado = listaChamado;
-    }
-    
-    
     
     public void gerarListaArea(){
         AreaFacade areaFacade = new AreaFacade();
@@ -90,31 +74,19 @@ public class CadChamadoMB implements Serializable{
         }
         
     }
-    public void gerarListaChamado() {
-        ChamadoFacade chamadoFacade = new ChamadoFacade();
-        listaChamado = chamadoFacade.listar("");
-        if (listaChamado == null) {
-            listaChamado = new ArrayList<Chamado>();
-        }
-    }
     
-    public String salvar() {
+    public void salvar() {
         chamado.setSituacao("Aguardo");
         chamado.setDataabertura(new Date());
-        chamado.setUsuario(usuarioLogadoMB.getUsuario());
+        chamado.setUsuarioabertura(usuarioLogadoMB.getUsuario());
         chamado.setArea(area);
-        chamado.setProblema("definir");
+        chamado.setPrioridade("definir");
+        UsuarioFacade usuarioFacade = new UsuarioFacade();
+        Usuario usuario = usuarioFacade.consultar(1);
+        chamado.setUsuarioexecutor(usuario);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamadoFacade.salvar(chamado);
-        RequestContext.getCurrentInstance().closeDialog("consChamado");
-        RequestContext.getCurrentInstance().update(":consultaChamado:tabelaConsultaChamada");
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
-        if(usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
-            return "consultaChamadoSuporte";
-        }else{
-            return "consultaChamado";
-        }
+        chamado = chamadoFacade.salvar(chamado);
+        RequestContext.getCurrentInstance().closeDialog(chamado);
     }
     
     public String cancelar() {

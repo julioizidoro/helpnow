@@ -64,10 +64,6 @@ public class Usuario implements Serializable {
     @Size(max = 50)
     @Column(name = "departamento")
     private String departamento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Chamado> chamadoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Interacao> interacaoList;
     @JoinColumn(name = "unidadeNegocio_idunidadeNegocio", referencedColumnName = "idunidadeNegocio")
     @ManyToOne(optional = false)
     private Unidadenegocio unidadenegocio;
@@ -167,21 +163,6 @@ public class Usuario implements Serializable {
         this.departamento = departamento;
     }
 
-    public List<Chamado> getChamadoList() {
-        return chamadoList;
-    }
-
-    public void setChamadoList(List<Chamado> chamadoList) {
-        this.chamadoList = chamadoList;
-    }
-
-    public List<Interacao> getInteracaoList() {
-        return interacaoList;
-    }
-
-    public void setInteracaoList(List<Interacao> interacaoList) {
-        this.interacaoList = interacaoList;
-    }
 
     public Unidadenegocio getUnidadenegocio() {
         return unidadenegocio;
@@ -215,7 +196,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.travelmate.model.Usuario[ idusuario=" + idusuario + " ]";
+        return getNome();
     }
     
 }

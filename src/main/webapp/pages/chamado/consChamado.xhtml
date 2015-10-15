@@ -11,7 +11,8 @@
             <h:form id="consultaChamadosimples">
                 <div id="centro">
                     <br></br>
-                    <p:commandLink action="#{chamadoMB.novo()}" class="labelAdicionar">
+                    <p:commandLink actionListener="#{chamadoMB.novo()}" class="labelAdicionar" process="@this" update="@none">
+                        <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialogNovo}" process="@this" update="tabelaConsultaChamada"/>
                         <img src="../../resources/img/novo.png" class="btnAdicionar" />
                     </p:commandLink>
                     <br></br>
@@ -33,14 +34,17 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
                             </h:outputText>
                         </p:column>
-
+                        <p:column headerText="Executor" style="width:120px;" >
+                            <h:outputText value="#{tabelaChamado.usuarioexecutor.nome}" />
+                        </p:column>
                         <p:column headerText=""  style="width: 40px;">
-                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}">
+                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Intereações"  >
+                                <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/interacao.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>
-                        <p:column headerText=""  style="width: 40px;" >
-                            <p:commandLink action="#{chamadoMB.concluir(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Concluída">
+                       <p:column headerText=""  style="width: 40px;" >
+                            <p:commandLink action="#{chamadoMB.finalizar(tabelaChamado, rowIx)}"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Finalizar" update="tabelaConsultaChamada">
                                 <img src="../../resources/img/concluir.png" width="37" height="32"/>
                             </p:commandLink>
                         </p:column>

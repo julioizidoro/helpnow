@@ -18,8 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,12 +26,10 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Kamila
+ * @author Wolverine
  */
 @Entity
 @Table(name = "chamado")
-@NamedQueries({
-    @NamedQuery(name = "Chamado.findAll", query = "SELECT c FROM Chamado c")})
 public class Chamado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,12 +50,18 @@ public class Chamado implements Serializable {
     @Size(max = 30)
     @Column(name = "prioridade")
     private String prioridade;
-    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
-    @ManyToOne(optional = false)
-    private Usuario usuario;
+    @Size(max = 3)
+    @Column(name = "executornotificado")
+    private String executornotificado;
     @JoinColumn(name = "area_idarea", referencedColumnName = "idarea")
     @ManyToOne(optional = false)
     private Area area;
+    @JoinColumn(name = "usuarioabertura", referencedColumnName = "idusuario")
+    @ManyToOne(optional = false)
+    private Usuario usuarioabertura;
+    @JoinColumn(name = "usuarioexecutor", referencedColumnName = "idusuario")
+    @ManyToOne(optional = false)
+    private Usuario usuarioexecutor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chamado")
     private List<Interacao> interacaoList;
 
@@ -102,12 +104,20 @@ public class Chamado implements Serializable {
         this.situacao = situacao;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getPrioridade() {
+        return prioridade;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setPrioridade(String prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public String getExecutornotificado() {
+        return executornotificado;
+    }
+
+    public void setExecutornotificado(String executornotificado) {
+        this.executornotificado = executornotificado;
     }
 
     public Area getArea() {
@@ -118,6 +128,24 @@ public class Chamado implements Serializable {
         this.area = area;
     }
 
+    public Usuario getUsuarioabertura() {
+        return usuarioabertura;
+    }
+
+    public void setUsuarioabertura(Usuario usuarioabertura) {
+        this.usuarioabertura = usuarioabertura;
+    }
+
+    public Usuario getUsuarioexecutor() {
+        return usuarioexecutor;
+    }
+
+    public void setUsuarioexecutor(Usuario usuarioexecutor) {
+        this.usuarioexecutor = usuarioexecutor;
+    }
+
+    
+
     public List<Interacao> getInteracaoList() {
         return interacaoList;
     }
@@ -126,15 +154,6 @@ public class Chamado implements Serializable {
         this.interacaoList = interacaoList;
     }
 
-    public String getPrioridade() {
-        return prioridade;
-    }
-
-    public void setPrioridade(String prioridade) {
-        this.prioridade = prioridade;
-    }
-
-    
     @Override
     public int hashCode() {
         int hash = 0;

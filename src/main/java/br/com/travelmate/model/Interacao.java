@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,7 +25,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Kamila
+ * @author Wolverine
  */
 @Entity
 @Table(name = "interacao")
@@ -44,12 +46,12 @@ public class Interacao implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descricao")
     private String descricao;
-    @JoinColumn(name = "chamado_idchamado", referencedColumnName = "idchamado")
-    @ManyToOne(optional = false)
-    private Chamado chamado;
     @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
+    @JoinColumn(name = "chamado_idchamado", referencedColumnName = "idchamado")
+    @ManyToOne(optional = false)
+    private Chamado chamado;
 
     public Interacao() {
     }
@@ -90,20 +92,20 @@ public class Interacao implements Serializable {
         this.descricao = descricao;
     }
 
-    public Chamado getChamado() {
-        return chamado;
-    }
-
-    public void setChamado(Chamado chamado) {
-        this.chamado = chamado;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Chamado getChamado() {
+        return chamado;
+    }
+
+    public void setChamado(Chamado chamado) {
+        this.chamado = chamado;
     }
 
     @Override
