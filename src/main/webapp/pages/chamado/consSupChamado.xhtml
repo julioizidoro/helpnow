@@ -10,11 +10,6 @@
             <h:form id="consultaChamado">
                 <div id="centro">
                     
-                    <p:commandLink actionListener="#{chamadoMB.novo()}" class="labelAdicionar" process="@this" update="@none" title="Novo Chamado">
-                        <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialogNovo}" process="@this" update="tabelaConsultaChamada"/>
-                        <img src="../../resources/img/novo.png" class="btnAdicionar" />
-                    </p:commandLink>
-                    <br></br>
                     <br></br><br></br>
                     <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
@@ -40,8 +35,8 @@
                         <p:column headerText="Executor" style="width:100px;" >
                             <h:outputText value="#{tabelaChamado.usuarioexecutor.nome}" />
                         </p:column>
-                        <p:column headerText="Prioridade" style="width:48px;" >
-                            <h:outputText value="#{tabelaChamado.prioridade}" />
+                        <p:column headerText="Prioridade" style="width:48px;text-align: center" >
+                            <p:graphicImage value="#{chamadoMB.retornarImgPrioridade(tabelaChamado)}" title="#{chamadoMB.retornarTitlePrioridade(tabelaChamado)}"/>
                         </p:column>
                         <p:column headerText=""  style="width: 35px;">
                             <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Intereações"  >
@@ -67,8 +62,10 @@
                 <p:dialog header="Iniciar chamado" widgetVar="iniciarChamado" modal="true" width="400">
                     
                 </p:dialog>
+                <p:stack  expanded="false" icon="../../resources/img/stack.png">
+                    <p:menuitem value="Novo Chamado" icon="../../resources/img/novo.png" actionListener="#{chamadoMB.novo()}" process="@this" update="@none"></p:menuitem>
+                </p:stack>
             </h:form>     
-           
         </ui:define>
     </ui:composition>
 </html>

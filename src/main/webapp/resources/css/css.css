@@ -62,3 +62,18 @@ h1 {
     margin-left:85%;
     top:-5%;
 }
+.ui-stack ul li{
+    font-size:13px;
+    width:45px;
+    height:45px;
+}
+.ui-stack ul li span{
+     width: 160px;
+}
+.ui-stack {
+    bottom: 28px;
+    right: 40px;
+} 
+.ui-stack ul li img{
+    width:150%;
+}

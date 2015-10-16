@@ -135,4 +135,28 @@ public class ChamadoMB implements Serializable{
         session.removeAttribute("nLinha");
         listaChamado.set(Integer.parseInt(nLinha), ch);
     }
+    
+    public String retornarImgPrioridade(Chamado chamado){
+        String retorno;
+        if(chamado.getPrioridade().equalsIgnoreCase("Normal")){
+            retorno = "../../resources/img/bolaVerde.png";
+        }else if(chamado.getPrioridade().equalsIgnoreCase("Urgente")){
+            retorno = "../../resources/img/bolaVermelha.png";
+        }else {
+            retorno = "../../resources/img/bolaAmarela.png";
+        }
+        return retorno;
+    }
+    
+    public String retornarTitlePrioridade(Chamado chamado){
+        String retorno;
+        if(chamado.getPrioridade().equalsIgnoreCase("Normal")){
+            retorno = "Normal";
+        }else if(chamado.getPrioridade().equalsIgnoreCase("Urgente")){
+            retorno = "Urgente";
+        }else {
+            retorno = "Alta";
+        }
+        return retorno;
+    }
 }
