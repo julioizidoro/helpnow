@@ -54,9 +54,11 @@ public class ChamadoMB implements Serializable{
     public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         if (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
-            listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'");
+            listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'"+
+                                                " order by c.prioridade, c.dataabertura");
         }else {
-            listaChamado = chamadoFacade.listar("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario());
+            listaChamado = chamadoFacade.listar("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario() 
+                                                + "  and c.situacao<>'Concluida' order by c.dataabertura");
         }
         if (listaChamado == null) {
             listaChamado = new ArrayList<Chamado>();
@@ -85,9 +87,10 @@ public class ChamadoMB implements Serializable{
         return ""; 
     }
           
-    public void abrirDialog(Chamado chamados) {
+    public void iniciar(Chamado chamados, String nLinha) {
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        session.setAttribute("nLinha", nLinha);    
         session.setAttribute("chamado", chamados);
         Map<String,Object> options = new HashMap<String, Object>();
         options.put("contentWidth", 430);
@@ -96,17 +99,26 @@ public class ChamadoMB implements Serializable{
 
     
     public void finalizar(Chamado chamados, String linha){
-        if(chamados.getSituacao().equalsIgnoreCase("Processo")){
+        if((chamados.getSituacao().equalsIgnoreCase("Processo")) && (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")) ){
             ChamadoFacade chamadoFacade = new ChamadoFacade();
             chamados.setSituacao("Finalizado");
             chamados = chamadoFacade.salvar(chamados);
             int numeroLinha = Integer.parseInt(linha);
-            listaChamado.remove(numeroLinha);
+            if (usuarioLogadoMB.getUsuario().getCargo().equalsIgnoreCase("TI")){
+                listaChamado.remove(numeroLinha);
+            }
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
+        }else if (chamados.getSituacao().equalsIgnoreCase("Fizalizado")){
+            ChamadoFacade chamadoFacade = new ChamadoFacade();
+            chamados.setSituacao("Concluida");
+            chamados = chamadoFacade.salvar(chamados);
+            listaChamado.remove(linha);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
         }else{
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Atenção", "Está chamada não foi iniciada."));
+            context.addMessage(null, new FacesMessage("Atenção", "Este chamado não foi iniciado."));
         }
     }
     
@@ -115,7 +127,12 @@ public class ChamadoMB implements Serializable{
         listaChamado.add(chamado);
     }
     
-    public void retornoDialog(){
-        gerarListaChamado();
+    public void retornoDialog(SelectEvent event){
+        Chamado ch = (Chamado) event.getObject();
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        String nLinha = (String) session.getAttribute("nLinha");
+        session.removeAttribute("nLinha");
+        listaChamado.set(Integer.parseInt(nLinha), ch);
     }
 }

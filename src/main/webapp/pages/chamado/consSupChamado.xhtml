@@ -50,7 +50,7 @@
                             </p:commandLink>
                         </p:column>
                         <p:column headerText=""  style="width: 35px;" >
-                            <p:commandLink  title="Iniciar" action="#{chamadoMB.abrirDialog(tabelaChamado)}">
+                            <p:commandLink  title="Iniciar" action="#{chamadoMB.iniciar(tabelaChamado, rowIx)}">
                                 <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/iniciar.png" width="35" height="32"/>
                             </p:commandLink>

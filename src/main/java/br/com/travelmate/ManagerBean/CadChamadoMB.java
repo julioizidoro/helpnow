@@ -85,8 +85,7 @@ public class CadChamadoMB implements Serializable{
         Usuario usuario = usuarioFacade.consultar(1);
         chamado.setUsuarioexecutor(usuario);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamado = chamadoFacade.salvar(chamado);
-        RequestContext.getCurrentInstance().closeDialog(chamado);
+        chamado = chamadoFacade.salvar(chamado);RequestContext.getCurrentInstance().closeDialog(chamado);
     }
     
     public String cancelar() {
