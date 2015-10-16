@@ -17,9 +17,15 @@
                     </p:commandLink>
                     <br></br>
                     <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                 paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {adicionar}"
                                  paginator="true" rows="7"    rowIndexVar="rowIx">
-
+                        <f:facet name="{adicionar}">
+                            <p:commandLink actionListener="#{chamadoMB.novo()}" class="labelAdicionar" process="@this" update="@none" title="Novo Chamado">
+                                <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialogNovo}" process="@this" update="tabelaConsultaChamada"/>
+                                 <img src="../../resources/img/novo.png" width="20" />
+                                <p:outputLabel value="Novo Chamado"/>
+                            </p:commandLink>
+                        </f:facet>
                         <p:column headerText="Problema"  >
                             <h:outputText value="#{tabelaChamado.problema}" />
                         </p:column>

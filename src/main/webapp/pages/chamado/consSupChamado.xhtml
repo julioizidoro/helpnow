@@ -9,12 +9,17 @@
         <ui:define name="corpo">
             <h:form id="consultaChamado">
                 <div id="centro">
-                    
                     <br></br><br></br>
                     <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {adicionar} "
                                  paginator="true" rows="7"    rowIndexVar="rowIx">
-
+                        <f:facet name="{adicionar}">
+                            <p:commandLink actionListener="#{chamadoMB.novo()}" class="labelAdicionar" process="@this" update="@none" title="Novo Chamado">
+                                <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialogNovo}" process="@this" update="tabelaConsultaChamada"/>
+                                 <img src="../../resources/img/novo.png" width="20" />
+                                <p:outputLabel value="Novo Chamado"/>
+                            </p:commandLink>
+                        </f:facet>
                         <p:column headerText="Problema" >
                             <h:outputText value="#{tabelaChamado.problema}" />
                         </p:column>
@@ -56,15 +61,9 @@
                             </p:commandLink>
                         </p:column>
                     </p:dataTable>
-                    <br></br>
-                    <br></br>
+                    <br></br><br></br>
                 </div>
-                <p:dialog header="Iniciar chamado" widgetVar="iniciarChamado" modal="true" width="400">
-                    
-                </p:dialog>
-                <p:stack  expanded="false" icon="../../resources/img/stack.png">
-                    <p:menuitem value="Novo Chamado" icon="../../resources/img/novo.png" actionListener="#{chamadoMB.novo()}" process="@this" update="@none"></p:menuitem>
-                </p:stack>
+                
             </h:form>     
         </ui:define>
     </ui:composition>
