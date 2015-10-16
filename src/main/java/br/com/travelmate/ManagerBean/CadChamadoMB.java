@@ -88,9 +88,8 @@ public class CadChamadoMB implements Serializable{
         chamado = chamadoFacade.salvar(chamado);RequestContext.getCurrentInstance().closeDialog(chamado);
     }
     
-    public String cancelar() {
+    public void cancelar() {
         RequestContext.getCurrentInstance().closeDialog(null);
-        return "";
     }
     
 }
