@@ -57,7 +57,7 @@ public class ChamadoMB implements Serializable{
             listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'"+
                                                 " order by c.prioridade, c.dataabertura");
         }else {
-            listaChamado = chamadoFacade.listar("select c from Chamado c where c.usuario.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario() 
+            listaChamado = chamadoFacade.listar("select c from Chamado c where c.usuarioabertura.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario() 
                                                 + "  and c.situacao<>'Concluida' order by c.dataabertura");
         }
         if (listaChamado == null) {
@@ -99,7 +99,7 @@ public class ChamadoMB implements Serializable{
 
     
     public void finalizar(Chamado chamados, String linha){
-        if((chamados.getSituacao().equalsIgnoreCase("Processo")) && (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")) ){
+        if ((chamados.getSituacao().equalsIgnoreCase("Processo")) && (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI"))) {
             ChamadoFacade chamadoFacade = new ChamadoFacade();
             chamados.setSituacao("Finalizado");
             chamados = chamadoFacade.salvar(chamados);
@@ -107,16 +107,18 @@ public class ChamadoMB implements Serializable{
             listaChamado.remove(numeroLinha);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
-        }else if (chamados.getSituacao().equalsIgnoreCase("Fizalizado")){
-            ChamadoFacade chamadoFacade = new ChamadoFacade();
-            chamados.setSituacao("Concluida");
-            chamados = chamadoFacade.salvar(chamados);
-            listaChamado.remove(linha);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
-        }else{
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Atenção", "Este chamado não foi iniciado."));
+        } else {
+            if (chamados.getSituacao().equalsIgnoreCase("Finalizado")) {
+                ChamadoFacade chamadoFacade = new ChamadoFacade();
+                chamados.setSituacao("Concluida");
+                chamados = chamadoFacade.salvar(chamados);
+                listaChamado.remove(linha);
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
+            } else {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Atenção", "Este chamado não foi iniciado."));
+            }
         }
     }
     
