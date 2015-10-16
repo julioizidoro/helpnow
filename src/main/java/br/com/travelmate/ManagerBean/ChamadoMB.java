@@ -104,9 +104,7 @@ public class ChamadoMB implements Serializable{
             chamados.setSituacao("Finalizado");
             chamados = chamadoFacade.salvar(chamados);
             int numeroLinha = Integer.parseInt(linha);
-            if (usuarioLogadoMB.getUsuario().getCargo().equalsIgnoreCase("TI")){
-                listaChamado.remove(numeroLinha);
-            }
+            listaChamado.remove(numeroLinha);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
         }else if (chamados.getSituacao().equalsIgnoreCase("Fizalizado")){
