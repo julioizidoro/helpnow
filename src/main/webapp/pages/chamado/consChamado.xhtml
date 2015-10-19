@@ -9,6 +9,7 @@
  <ui:composition template="/pages/templates/default.xhtml">
         <ui:define name="corpo">
             <h:form id="consultaChamadosimples">
+                <p:poll interval="5" listener="#{chamadoMB.gerarListaChamado()}" update="tabelaConsultaChamada" />
                 <div id="centro">
                     <br></br>
                     <p:commandLink actionListener="#{chamadoMB.novo()}" class="labelAdicionar" process="@this" update="@none">
