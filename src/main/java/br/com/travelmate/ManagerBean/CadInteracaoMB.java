@@ -8,6 +8,7 @@ package br.com.travelmate.ManagerBean;
 import br.com.travelmate.facade.InteracaoFacade;
 import br.com.travelmate.model.Chamado;
 import br.com.travelmate.model.Interacao;
+import br.com.travelmate.util.EnviarEmailBean;
 import br.com.travelmate.util.Formatacao;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class CadInteracaoMB implements Serializable{
         interacao.setData(new Date());
         interacao.setHora(Formatacao.foramtarHoraString());
         interacao.setChamado(chamado);
-        interacaoFacede.salvar(interacao);
+        interacao = interacaoFacede.salvar(interacao);
         
         chamados = interacao.getChamado();
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -106,6 +107,15 @@ public class CadInteracaoMB implements Serializable{
         RequestContext.getCurrentInstance().closeDialog("consChamado");
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
+    }
+    
+    public void enviarEmail(){
+        String destinatario;
+        if (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
+            destinatario = interacao.getChamado().getUsuarioabertura().getEmail();
+        }else destinatario = interacao.getChamado().getUsuarioexecutor().getEmail();
+        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(interacao.getDescricao(), destinatario, "Nova Interação");
+        enviarEmailBean.enviarEmail();
     }
     
     public String cancelar(){

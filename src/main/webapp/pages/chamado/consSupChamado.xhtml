@@ -10,6 +10,7 @@
             <h:form id="consultaChamado">
                 <div id="centro">
                     <br></br><br></br>
+                    <p:poll interval="300" listener="#{chamadoMB.gerarListaChamado()}" update="tabelaConsultaChamada" />
                     <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
                                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {adicionar} "
                                  paginator="true" rows="7"    rowIndexVar="rowIx">

@@ -2,6 +2,7 @@ package br.com.travelmate.ManagerBean;
 
 import br.com.travelmate.facade.ChamadoFacade;
 import br.com.travelmate.model.Chamado;
+import br.com.travelmate.util.EnviarEmailBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,6 +106,7 @@ public class ChamadoMB implements Serializable{
             chamados = chamadoFacade.salvar(chamados);
             int numeroLinha = Integer.parseInt(linha);
             listaChamado.remove(numeroLinha);
+            enviarEmail("Chamado Fnalizado pelo Departamento de TI", chamados.getUsuarioabertura().getEmail(), "Chamado Finalizado");
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
         } else {
@@ -113,6 +115,7 @@ public class ChamadoMB implements Serializable{
                 chamados.setSituacao("Concluida");
                 chamados = chamadoFacade.salvar(chamados);
                 listaChamado.remove(linha);
+                enviarEmail("Chamado Concluído pelo Usuário", chamados.getUsuarioexecutor().getEmail(), "Chamado Concluído");
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
             } else {
@@ -120,6 +123,11 @@ public class ChamadoMB implements Serializable{
                 context.addMessage(null, new FacesMessage("Atenção", "Este chamado não foi iniciado."));
             }
         }
+    }
+    
+    public void enviarEmail(String destinatario, String titulo, String problema){
+        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(problema, destinatario, titulo);
+        enviarEmailBean.enviarEmail();
     }
     
     public void retornoDialogNovo(SelectEvent event) {

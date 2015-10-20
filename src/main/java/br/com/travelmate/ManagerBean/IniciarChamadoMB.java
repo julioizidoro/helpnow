@@ -3,6 +3,7 @@ package br.com.travelmate.ManagerBean;
 import br.com.travelmate.facade.ChamadoFacade;
 import br.com.travelmate.model.Chamado;
 import br.com.travelmate.model.Usuario;
+import br.com.travelmate.util.EnviarEmailBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,13 @@ public class IniciarChamadoMB implements Serializable{
         chamado = chamadoFacade.salvar(chamado);
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Chamada Iniciada ", "Sucesso"));
+        enviarEmail();
         RequestContext.getCurrentInstance().closeDialog(chamado);
+    }
+    
+    public void enviarEmail(){
+        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(chamado.getProblema(), chamado.getUsuarioexecutor().getEmail(), "Chamado Iniciado");
+        enviarEmailBean.enviarEmail();
     }
     
 }

@@ -7,6 +7,7 @@ import br.com.travelmate.facade.UsuarioFacade;
 import br.com.travelmate.model.Area;
 import br.com.travelmate.model.Chamado;
 import br.com.travelmate.model.Usuario;
+import br.com.travelmate.util.EnviarEmailBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -85,11 +86,18 @@ public class CadChamadoMB implements Serializable{
         Usuario usuario = usuarioFacade.consultar(1);
         chamado.setUsuarioexecutor(usuario);
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamado = chamadoFacade.salvar(chamado);RequestContext.getCurrentInstance().closeDialog(chamado);
+        chamado = chamadoFacade.salvar(chamado);
+        enviarEmail();
+        RequestContext.getCurrentInstance().closeDialog(chamado);
     }
     
     public void cancelar() {
         RequestContext.getCurrentInstance().closeDialog(null);
+    }
+    
+    public void enviarEmail(){
+        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(chamado.getProblema(), "ti@travelmate.com.br", "Novo Chamado");
+        enviarEmailBean.enviarEmail();
     }
     
 }
