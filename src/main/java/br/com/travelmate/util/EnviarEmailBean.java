@@ -126,8 +126,8 @@ public class EnviarEmailBean {
                 "                      </td><br></br> </tr></table> </td> </tr><tr>\n" +
                 "        <td><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">\n" +
                 "          <br></br><tr><td width=\"20\"><p>&nbsp;</p></td><td><table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" align=\"left\">\n" +
-                "                      <tr><td><table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"5\" style=\"background: #fff\"><tr><td><p><span style=\"color:#366\">Suporte</span></p></td>\n" +
-                "                    </tr><tr><td><p><strong><span style=\"color:#366;\">Help Now / <a href=\"mailto:ti@travelmate.com.br\"  style=\"color:#366\">hn@travelmate.com.br</a></span></strong></p></td>\n" +
+                "                      <tr><td><table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"5\" style=\"background: #fff\"><tr><td><p><span >Suporte</span></p></td>\n" +
+"                    </tr><tr><td><p><strong><span style=\"color:#114A3D;\">Help</span><span style=\"color:#AFCA0B;\"> Now / <a href=\"mailto:ti@travelmate.com.br\"  style=\"color:#366\">hn@travelmate.com.br</a></span></strong></p></td>\n" +
                 "                    </tr></table></td></tr> </table></td><td>&nbsp;</td> <td width=\"20\"><p>&nbsp;</p></td></tr>\n" +
                 "          </table></td></tr> <tr><td><div align=\"center\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">\n" +
                 "            <tr> <td>&nbsp;</td> </tr></table></div></td> </tr>\n" +
