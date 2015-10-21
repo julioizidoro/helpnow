@@ -79,7 +79,7 @@ public class IniciarChamadoMB implements Serializable{
     }
     
     public void enviarEmail(){
-        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(chamado.getProblema(), chamado.getUsuarioexecutor().getEmail(), "Chamado Iniciado");
+        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(chamado.getProblema(), chamado.getUsuarioexecutor().getEmail(), "Chamado Iniciado No. "  + chamado.getIdchamado());
         enviarEmailBean.enviarEmail();
     }
     

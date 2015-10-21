@@ -21,6 +21,9 @@
                                 <p:outputLabel value="Novo Chamado"/>
                             </p:commandLink>
                         </f:facet>
+                        <p:column headerText="Número" style="width:40px;text-align: center" >
+                            <h:outputText value="#{tabelaChamado.idchamado}" />
+                        </p:column>
                         <p:column headerText="Problema" >
                             <h:outputText value="#{tabelaChamado.problema}" />
                         </p:column>
@@ -41,7 +44,7 @@
                         <p:column headerText="Executor" style="width:100px;" >
                             <h:outputText value="#{tabelaChamado.usuarioexecutor.nome}" />
                         </p:column>
-                        <p:column headerText="Prioridade" style="width:48px;text-align: center" >
+                        <p:column headerText="Prioridade" style="width:55px;text-align: center" >
                             <p:graphicImage value="#{chamadoMB.retornarImgPrioridade(tabelaChamado)}" title="#{chamadoMB.retornarTitlePrioridade(tabelaChamado)}"/>
                         </p:column>
                         <p:column headerText=""  style="width: 35px;">

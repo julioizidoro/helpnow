@@ -106,7 +106,7 @@ public class ChamadoMB implements Serializable{
             chamados = chamadoFacade.salvar(chamados);
             int numeroLinha = Integer.parseInt(linha);
             listaChamado.remove(numeroLinha);
-            enviarEmail("Chamado Fnalizado pelo Departamento de TI", chamados.getUsuarioabertura().getEmail(), "Chamado Finalizado");
+            enviarEmail("Chamado Fnalizado pelo Departamento de TI", chamados.getUsuarioabertura().getEmail(), "Chamado Finalizado No. " + chamados.getIdchamado());
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
         } else {
@@ -115,7 +115,7 @@ public class ChamadoMB implements Serializable{
                 chamados.setSituacao("Concluida");
                 chamados = chamadoFacade.salvar(chamados);
                 listaChamado.remove(linha);
-                enviarEmail("Chamado Concluído pelo Usuário", chamados.getUsuarioexecutor().getEmail(), "Chamado Concluído");
+                enviarEmail("Chamado Concluído pelo Usuário", chamados.getUsuarioexecutor().getEmail(), "Chamado Concluído No. "  + chamados.getIdchamado());
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
             } else {

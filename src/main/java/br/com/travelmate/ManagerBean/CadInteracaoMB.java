@@ -99,7 +99,7 @@ public class CadInteracaoMB implements Serializable{
         interacao.setHora(Formatacao.foramtarHoraString());
         interacao.setChamado(chamado);
         interacao = interacaoFacede.salvar(interacao);
-        
+         enviarEmail();
         chamados = interacao.getChamado();
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
@@ -114,7 +114,7 @@ public class CadInteracaoMB implements Serializable{
         if (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
             destinatario = interacao.getChamado().getUsuarioabertura().getEmail();
         }else destinatario = interacao.getChamado().getUsuarioexecutor().getEmail();
-        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(interacao.getDescricao(), destinatario, "Nova Interação");
+        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(interacao.getDescricao(), destinatario, "Nova Interação do Chamado No. " + interacao.getChamado().getIdchamado() );
         enviarEmailBean.enviarEmail();
     }
     

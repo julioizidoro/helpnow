@@ -96,7 +96,7 @@ public class CadChamadoMB implements Serializable{
     }
     
     public void enviarEmail(){
-        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(chamado.getProblema(), "ti@travelmate.com.br", "Novo Chamado");
+        EnviarEmailBean enviarEmailBean = new EnviarEmailBean(chamado.getProblema(), "ti@travelmate.com.br", "Novo Chamado No." + chamado.getIdchamado());
         enviarEmailBean.enviarEmail();
     }
     
