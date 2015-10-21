@@ -29,12 +29,12 @@ public class EnviarEmailBean {
         //email.setSmtpPort(587);
         email.setAuthenticator(new DefaultAuthenticator("ti@travelmate.com.br", "20SimpleS78"));
         try {
-            email.setFrom("systm@travelmate.com.br");
+            email.setFrom("hn@travelmate.com.br");
             listarDestinos();
         } catch (EmailException ex) {
             Logger.getLogger(EnviarEmailBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-        email.setSubject("Informativo SysTM");
+        email.setSubject("Notificação HelpNow");
         try {
             email.setHtmlMsg(corpo);
         } catch (EmailException ex) {
