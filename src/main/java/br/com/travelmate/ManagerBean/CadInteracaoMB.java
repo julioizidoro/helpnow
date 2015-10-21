@@ -104,7 +104,7 @@ public class CadInteracaoMB implements Serializable{
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         session.setAttribute("chamado", chamados);
-        RequestContext.getCurrentInstance().closeDialog("consChamado");
+        RequestContext.getCurrentInstance().closeDialog(chamados);
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Cadastrado com Sucesso", ""));
     }

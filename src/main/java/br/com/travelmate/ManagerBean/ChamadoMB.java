@@ -125,7 +125,7 @@ public class ChamadoMB implements Serializable{
         }
     }
     
-    public void enviarEmail(String destinatario, String titulo, String problema){
+    public void enviarEmail(String problema, String titulo, String destinatario){
         EnviarEmailBean enviarEmailBean = new EnviarEmailBean(problema, destinatario, titulo);
         enviarEmailBean.enviarEmail();
     }
