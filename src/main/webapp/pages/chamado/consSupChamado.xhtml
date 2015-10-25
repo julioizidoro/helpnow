@@ -13,7 +13,8 @@
                     <p:poll interval="300" listener="#{chamadoMB.gerarListaChamado()}" update="tabelaConsultaChamada" />
                     <p:dataTable id="tabelaConsultaChamada" var="tabelaChamado" value="#{chamadoMB.listaChamado}" class="tabelaArea"
                                  paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {adicionar} "
-                                 paginator="true" rows="7"    rowIndexVar="rowIx">
+                                 paginator="true" rows="7"    rowIndexVar="rowIx" editable="true" editMode="cell">
+                        <p:ajax event="cellEdit" listener="#{chamadoMB.salvarEditaChamado(tabelaChamado)}" update=":consultaChamado:tabelaConsultaChamada" />
                         <f:facet name="{adicionar}">
                             <p:commandLink actionListener="#{chamadoMB.novo()}" class="labelAdicionar" process="@this" update="@none" title="Novo Chamado">
                                 <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialogNovo}" process="@this" update="tabelaConsultaChamada"/>
@@ -31,7 +32,18 @@
                              <h:outputText value="#{tabelaChamado.usuarioabertura.nome}" />
                         </p:column>
                         <p:column headerText="Situação"  style="width:50px;">
-                            <h:outputText value="#{tabelaChamado.situacao}" />
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{tabelaChamado.situacao}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:selectOneMenu id="situacao" value="#{tabelaChamado.situacao}" style="margin-left:2%;width:47%">
+                                        <f:selectItem itemLabel="Aguardando" itemValue="Aguardando" /> 
+                                        <f:selectItem itemLabel="Aguardando Liberação" itemValue="Augardando Liberação" /> 
+                                        <f:selectItem itemLabel="Em Análise" itemValue="Em Análise" /> 
+                                    </p:selectOneMenu>
+                                </f:facet>
+                             </p:cellEditor>
                         </p:column>
                         <p:column headerText="Area" style="width:70px;" >
                             <h:outputText value="#{tabelaChamado.area.descricao}" />

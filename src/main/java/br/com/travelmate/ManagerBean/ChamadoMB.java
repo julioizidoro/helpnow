@@ -55,11 +55,11 @@ public class ChamadoMB implements Serializable{
     public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         if (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
-            listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao='Aguardo' or c.situacao='Processo'"+
-                                                " order by c.prioridade, c.dataabertura");
+            listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao<>'Concluído' or c.situacao<>'Finalizado'"+
+                                                " order by c.idprioridade, c.dataabertura");
         }else {
             listaChamado = chamadoFacade.listar("select c from Chamado c where c.usuarioabertura.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario() 
-                                                + "  and c.situacao<>'Concluida' order by c.dataabertura");
+                                                + "  and c.situacao<>'Finalizado' order by c.idprioridade, c.dataabertura");
         }
         if (listaChamado == null) {
             listaChamado = new ArrayList<Chamado>();
@@ -100,22 +100,23 @@ public class ChamadoMB implements Serializable{
 
     
     public void finalizar(Chamado chamados, String linha){
-        if ((chamados.getSituacao().equalsIgnoreCase("Processo")) && (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI"))) {
+        if ((!chamados.getSituacao().equalsIgnoreCase("Concluído")) && (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI"))
+                && (!chamados.getSituacao().equalsIgnoreCase("Finalizado"))) {
             ChamadoFacade chamadoFacade = new ChamadoFacade();
-            chamados.setSituacao("Finalizado");
+            chamados.setSituacao("Concluído");
             chamados = chamadoFacade.salvar(chamados);
             int numeroLinha = Integer.parseInt(linha);
             listaChamado.remove(numeroLinha);
-            enviarEmail("Chamado Fnalizado pelo Departamento de TI", chamados.getUsuarioabertura().getEmail(), "Chamado Finalizado No. " + chamados.getIdchamado());
+            enviarEmail("Chamado Concluído pelo Departamento de TI", chamados.getUsuarioabertura().getEmail(), "Chamado Concluído No. " + chamados.getIdchamado());
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
+            context.addMessage(null, new FacesMessage("Concluído com Sucesso", ""));
         } else {
-            if (chamados.getSituacao().equalsIgnoreCase("Finalizado")) {
+            if (chamados.getSituacao().equalsIgnoreCase("Concluído")) {
                 ChamadoFacade chamadoFacade = new ChamadoFacade();
-                chamados.setSituacao("Concluida");
+                chamados.setSituacao("Finalizado");
                 chamados = chamadoFacade.salvar(chamados);
                 listaChamado.remove(linha);
-                enviarEmail("Chamado Concluído pelo Usuário", chamados.getUsuarioexecutor().getEmail(), "Chamado Concluído No. "  + chamados.getIdchamado());
+                enviarEmail("Chamado Finalizado pelo Usuário", chamados.getUsuarioexecutor().getEmail(), "Chamado Finalizado No. "  + chamados.getIdchamado());
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Finalizado com Sucesso", ""));
             } else {
@@ -166,5 +167,10 @@ public class ChamadoMB implements Serializable{
             retorno = "Alta";
         }
         return retorno;
+    }
+    
+    public void salvarEditaChamado(Chamado chamado){
+        ChamadoFacade chamadoFacade = new ChamadoFacade();
+        chamadoFacade.salvar(chamado);
     }
 }

@@ -53,6 +53,8 @@ public class Chamado implements Serializable {
     @Size(max = 3)
     @Column(name = "executornotificado")
     private String executornotificado;
+    @Column(name = "idprioridade")
+    private int idprioridade;
     @JoinColumn(name = "area_idarea", referencedColumnName = "idarea")
     @ManyToOne(optional = false)
     private Area area;
@@ -142,6 +144,14 @@ public class Chamado implements Serializable {
 
     public void setUsuarioexecutor(Usuario usuarioexecutor) {
         this.usuarioexecutor = usuarioexecutor;
+    }
+
+    public int getIdprioridade() {
+        return idprioridade;
+    }
+
+    public void setIdprioridade(int idprioridade) {
+        this.idprioridade = idprioridade;
     }
 
     

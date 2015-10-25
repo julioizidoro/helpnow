@@ -77,11 +77,12 @@ public class CadChamadoMB implements Serializable{
     }
     
     public void salvar() {
-        chamado.setSituacao("Aguardo");
+        chamado.setSituacao("Aguardando");
         chamado.setDataabertura(new Date());
         chamado.setUsuarioabertura(usuarioLogadoMB.getUsuario());
         chamado.setArea(area);
         chamado.setPrioridade("definir");
+        chamado.setIdprioridade(4);
         UsuarioFacade usuarioFacade = new UsuarioFacade();
         Usuario usuario = usuarioFacade.consultar(1);
         chamado.setUsuarioexecutor(usuario);

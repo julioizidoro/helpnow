@@ -69,8 +69,13 @@ public class IniciarChamadoMB implements Serializable{
     
     public void iniciar(){
         ChamadoFacade chamadoFacade = new ChamadoFacade();
-        chamado.setSituacao("Processo");
+        chamado.setSituacao("Em Análise");
         chamado.setUsuarioexecutor(UsuarioExecutor);
+        if (chamado.getPrioridade().equalsIgnoreCase("Normal")){
+            chamado.setIdprioridade(3);
+        }else if (chamado.getPrioridade().equalsIgnoreCase("Alta")){
+            chamado.setIdprioridade(2);
+        }else chamado.setIdprioridade(1);
         chamado = chamadoFacade.salvar(chamado);
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Chamada Iniciada ", "Sucesso"));
