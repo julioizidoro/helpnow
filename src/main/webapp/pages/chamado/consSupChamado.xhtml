@@ -25,13 +25,13 @@
                         <p:column headerText="Número" style="width:40px;text-align: center" >
                             <h:outputText value="#{tabelaChamado.idchamado}" />
                         </p:column>
-                        <p:column headerText="Problema" >
+                        <p:column headerText="Problema" style="width: 50px" >
                             <h:outputText value="#{tabelaChamado.problema}" />
                         </p:column>
                          <p:column headerText="Usuario" style="width:100px;"  >
                              <h:outputText value="#{tabelaChamado.usuarioabertura.nome}" />
                         </p:column>
-                        <p:column headerText="Situação"  style="width:50px;">
+                        <p:column headerText="Situação"  style="width:60px;">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{tabelaChamado.situacao}" />
@@ -45,7 +45,7 @@
                                 </f:facet>
                              </p:cellEditor>
                         </p:column>
-                        <p:column headerText="Area" style="width:70px;" >
+                        <p:column headerText="Area" style="width:50px;" >
                             <h:outputText value="#{tabelaChamado.area.descricao}" />
                         </p:column>
                         <p:column headerText="Data de Abertura" style="width:60px;" >
@@ -59,19 +59,19 @@
                         <p:column headerText="Prioridade" style="width:55px;text-align: center" >
                             <p:graphicImage value="#{chamadoMB.retornarImgPrioridade(tabelaChamado)}" title="#{chamadoMB.retornarTitlePrioridade(tabelaChamado)}"/>
                         </p:column>
-                        <p:column headerText=""  style="width: 35px;">
+                        <p:column headerText=""  style="width: 30px;">
                             <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Intereações"  >
                                 <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/interacao.png" width="35" height="32"/>
                             </p:commandLink>
                         </p:column>
-                        <p:column headerText=""  style="width: 35px;" >
+                        <p:column headerText=""  style="width: 30px;" >
                             <p:commandLink  title="Iniciar" action="#{chamadoMB.iniciar(tabelaChamado, rowIx)}">
                                 <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/iniciar.png" width="35" height="32"/>
                             </p:commandLink>
                         </p:column>
-                        <p:column headerText=""  style="width: 35px;" >
+                        <p:column headerText=""  style="width: 30px;" >
                             <p:commandLink action="#{chamadoMB.finalizar(tabelaChamado, rowIx)}"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Finalizar" update="tabelaConsultaChamada">
                                 <img src="../../resources/img/concluir.png" width="35" height="32"/>
                             </p:commandLink>
