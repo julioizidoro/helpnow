@@ -73,7 +73,7 @@ public class ChamadoMB implements Serializable{
     }
     
     public String interacao(Chamado chamados){  
-        if(chamados.getSituacao().equalsIgnoreCase("Processo")){
+        if(!chamados.getSituacao().equalsIgnoreCase("Aguardando")){
            FacesContext fc = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
             session.setAttribute("chamado", chamados);
