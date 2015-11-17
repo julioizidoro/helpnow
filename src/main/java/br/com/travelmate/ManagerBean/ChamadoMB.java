@@ -55,7 +55,7 @@ public class ChamadoMB implements Serializable{
     public void gerarListaChamado() {
         ChamadoFacade chamadoFacade = new ChamadoFacade();
         if (usuarioLogadoMB.getUsuario().getDepartamento().equalsIgnoreCase("TI")){
-            listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao<>'Concluído' or c.situacao<>'Finalizado'"+
+            listaChamado = chamadoFacade.listar("select c from Chamado c where c.situacao<>'Concluído' and c.situacao<>'Finalizado'"+
                                                 " order by c.idprioridade, c.dataabertura");
         }else {
             listaChamado = chamadoFacade.listar("select c from Chamado c where c.usuarioabertura.idusuario="+usuarioLogadoMB.getUsuario().getIdusuario() 
