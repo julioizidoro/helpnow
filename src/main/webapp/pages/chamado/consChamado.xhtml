@@ -48,7 +48,7 @@
                             <h:outputText value="#{tabelaChamado.usuarioexecutor.nome}" />
                         </p:column>
                         <p:column headerText=""  style="width: 40px;">
-                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Intereações"  >
+                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Interações"  >
                                 <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/interacao.png" width="37" height="32"/>
                             </p:commandLink>

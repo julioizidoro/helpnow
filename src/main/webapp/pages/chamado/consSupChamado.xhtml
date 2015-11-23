@@ -60,7 +60,7 @@
                             <p:graphicImage value="#{chamadoMB.retornarImgPrioridade(tabelaChamado)}" title="#{chamadoMB.retornarTitlePrioridade(tabelaChamado)}"/>
                         </p:column>
                         <p:column headerText=""  style="width:25px;">
-                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Intereações"  >
+                            <p:commandLink action="#{chamadoMB.interacao(tabelaChamado)}" update="@all"  oncomplete="popAprovar.hide(); #{meuBean.objetos}" title="Interações"  >
                                 <p:ajax event="dialogReturn" listener="#{chamadoMB.retornoDialog}" process="@this" update="tabelaConsultaChamada"/>
                                 <img src="../../resources/img/interacao.png" width="35" height="32"/>
                             </p:commandLink>
