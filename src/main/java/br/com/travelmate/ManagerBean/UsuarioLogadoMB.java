@@ -97,16 +97,23 @@ public class UsuarioLogadoMB implements Serializable{
              context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
     }
      
-    public void validarTrocarSenha(){
-        if ((usuario.getLogin()!=null) && (usuario.getSenha()==null)){
+    public void validarTrocarSenha() {
+        if ((usuario.getLogin() != null) && (usuario.getSenha() == null)) {
             FacesContext context = FacesContext.getCurrentInstance();
-             context.addMessage(null, new FacesMessage("Login Invalido", "Erro!"));
-        }else{
+            context.addMessage(null, new FacesMessage("Login Invalido", "Erro!"));
+        } else {
             UsuarioFacade usuarioFacade = new UsuarioFacade();
+             String senha = "";
+            try {
+                senha = Criptografia.encript(usuario.getSenha());
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(UsuarioLogadoMB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            usuario.setSenha(senha);
             usuario = usuarioFacade.consultar(usuario.getLogin(), usuario.getSenha());
-            if (usuario==null){
-               FacesContext context = FacesContext.getCurrentInstance();
-             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
+            if (usuario == null) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
             }
         }
     }
@@ -124,12 +131,12 @@ public class UsuarioLogadoMB implements Serializable{
                 novaSenha = "";
                 confirmaNovaSenha = "";
                 FacesContext context = FacesContext.getCurrentInstance();
-             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
+                context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
             }
 
         } else {
             FacesContext context = FacesContext.getCurrentInstance();
-             context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
+            context.addMessage(null, new FacesMessage("Acesso Negado", "Erro!"));
         }
         return "";
     }
