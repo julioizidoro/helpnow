@@ -20,7 +20,11 @@ import org.primefaces.context.RequestContext;
 @ViewScoped
 public class IniciarChamadoMB implements Serializable{
     
-    private Usuario UsuarioExecutor;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Usuario UsuarioExecutor;
     private List<Usuario> listaExecutor;
     private Chamado chamado;
     

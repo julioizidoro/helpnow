@@ -23,7 +23,11 @@ import org.primefaces.event.SelectEvent;
 @ViewScoped
 public class ChamadoMB implements Serializable{
     
-    @Inject
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Inject
     private UsuarioLogadoMB usuarioLogadoMB;
     private List<Chamado> listaChamado;
     
